@@ -13,7 +13,7 @@ const workData = [
     title: "AI Intern",
     company: "Vattenfall",
     bullets: [
-      "Evaluated how Retrieval-Augmented Generation (RAG) can increase efficiency in software development teams working on large, complex enterprise systems by mapping AI capabilities to real-world developer workflows.", // Added missing comma here
+      "Evaluated how Retrieval-Augmented Generation (RAG) can increase efficiency in software development teams working on large, complex enterprise systems by mapping AI capabilities to real-world developer workflows.",
       "Designed a cloud-based RAG Model proof of concept using Microsoft Azure (AI Foundry, AI Search, Blob Storage, Copilot Studio, Power Automate) to act as an expert in a complex, regulated energy trading platform.",
       "Explored the integration of DevOps data to accelerate software troubleshooting and improve project planning insights for both engineering and business stakeholders in a regulated enterprise environment."
     ],
@@ -62,13 +62,13 @@ function CompanyLogo({ src, title }) {
       <img
         src={src}
         alt={title}
-        className="w-12 h-12 rounded-xl object-contain bg-white p-1.5 border border-slate-700 shrink-0"
+        className="w-16 h-16 rounded-2xl object-contain bg-white p-2 border border-slate-700 shrink-0 shadow-md"
       />
     );
   }
   return (
-    <div className="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0">
-      <span className="text-lg font-bold text-cyan-400">{title.charAt(0)}</span>
+    <div className="w-16 h-16 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0 shadow-md">
+      <span className="text-2xl font-bold text-cyan-400">{title.charAt(0)}</span>
     </div>
   );
 }
@@ -117,31 +117,32 @@ function Work() {
         {filteredWork.map((entry, i) => (
           <div
             key={`${entry.company}-${entry.title}`}
-            className={`flex items-start gap-5 py-6 ${
+            className={`flex items-start gap-6 py-8 transition-all duration-700 ease-out animate-in fade-in slide-in-from-left-8 fill-mode-backwards ${
               i !== 0 ? 'border-t border-slate-800/80' : ''
             }`}
+            style={{ animationDelay: `${i * 150}ms` }}
           >
             <CompanyLogo src={entry.logo} title={entry.company} />
             
             <div className="flex-1">
               {/* Role & Company */}
-              <h3 className="text-lg font-semibold text-slate-100">
-                {entry.title} <span className="text-cyan-400 font-normal">@ {entry.company}</span>
+              <h3 className="text-xl md:text-2xl font-semibold text-slate-100">
+                {entry.title} <span className="text-cyan-400/90 font-medium">@ {entry.company}</span>
               </h3>
               
               {/* Dates */}
-              <p className="text-xs text-slate-500 my-1">{entry.dates}</p>
+              <p className="text-xs font-mono text-slate-400 my-1.5">{entry.dates}</p>
 
               {/* Description (Renders conditionally if present) */}
               {entry.description && (
-                <p className="text-slate-400 text-sm leading-relaxed mb-3">
+                <p className="text-slate-300 text-base leading-relaxed mb-3 max-w-4xl">
                   {entry.description}
                 </p>
               )}
 
               {/* Course / Project Bullets */}
               {entry.bullets.length > 0 && (
-                <ul className="list-disc list-outside ml-4 text-sm text-slate-300 space-y-1.5 mb-3">
+                <ul className="list-disc list-outside ml-5 text-base text-slate-300 space-y-1.5 mb-4 max-w-4xl">
                   {entry.bullets.map((bullet) => (
                     <li key={bullet} className="text-slate-400">
                       <span className="text-slate-300 leading-relaxed">{bullet}</span>
@@ -151,11 +152,11 @@ function Work() {
               )}
 
               {/* Skill Badges */}
-              <div className="flex flex-wrap gap-2 mt-2">
+              <div className="flex flex-wrap gap-2 mt-3">
                 {entry.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="text-xs font-mono px-2.5 py-1 rounded-full bg-slate-800/80 text-cyan-400 border border-slate-700/60"
+                    className="text-xs font-mono px-3 py-1 rounded-full bg-slate-800/80 text-cyan-400 border border-slate-700/60 shadow-sm"
                   >
                     {skill}
                   </span>

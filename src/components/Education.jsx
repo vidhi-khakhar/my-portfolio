@@ -17,8 +17,11 @@ const educationData = [
     dates: "2009 – May 2024",
     title: "International School of The Hague",
     subtitle: "High School Diploma, International Baccalaureate (IBDP)",
-    details: "HL: Computer Science, Business Management, Mathematics Analysis & Approaches. SL: Physics, English A Language & Literature, Dutch A Language & Literature.",
     logo: ishLogo,
+    isHighSchool: true,
+    diplomaText: "Graduated with an IB DP Diploma and a Bilingual Diploma in English and Dutch Language and Literature.",
+    hlSubjects: "HL: Computer Science, Business Management, Mathematics Analysis & Approaches.",
+    slSubjects: "SL: Physics, English A Language & Literature, Dutch A Language & Literature.",
   },
   {
     dates: "2022 – 2023",
@@ -35,13 +38,55 @@ function InstitutionLogo({ src, title }) {
       <img
         src={src}
         alt={title}
-        className="w-12 h-12 rounded-xl object-contain bg-white p-1.5 border border-slate-700 shrink-0"
+        className="w-16 h-16 rounded-2xl object-contain bg-white p-2 border border-slate-700 shrink-0 shadow-md"
       />
     );
   }
   return (
-    <div className="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0">
-      <span className="text-lg font-bold text-cyan-400">{title.charAt(0)}</span>
+    <div className="w-16 h-16 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0 shadow-md">
+      <span className="text-2xl font-bold text-cyan-400">{title.charAt(0)}</span>
+    </div>
+  );
+}
+
+// Custom Animated CSE Code Terminal Graphic
+function AnimatedCodeTerminal() {
+  return (
+    <div className="relative w-48 sm:w-56 h-32 bg-slate-900/90 border border-slate-700/80 rounded-xl p-3 shadow-xl backdrop-blur-sm shrink-0 mt-8 animate-[bounce_4s_infinite_ease-in-out]">
+      {/* Terminal Window Header */}
+      <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800">
+        <div className="flex gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
+          <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+          <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+        </div>
+        <span className="text-[10px] font-mono text-slate-500">cse_student.cs</span>
+      </div>
+
+      {/* Code Lines with Blinking Cursor */}
+      <div className="space-y-1.5 font-mono text-xs">
+        <div className="flex items-center gap-1">
+          <span className="text-purple-400 font-semibold">class</span>
+          <span className="text-amber-300">CSStudent</span>
+          <span className="text-slate-400">{'{}'}</span>
+        </div>
+        <div className="flex items-center gap-1.5 pl-3">
+          <span className="text-cyan-400">status:</span>
+          <span className="text-emerald-400 font-semibold">'learning'</span>
+        </div>
+        <div className="flex items-center gap-1 pl-3">
+          <span className="text-slate-400">&gt;</span>
+          <span className="text-slate-300">compiling</span>
+          <span className="w-1.5 h-3 bg-cyan-400 inline-block animate-pulse ml-0.5" />
+        </div>
+      </div>
+
+      {/* Floating Bracket Icon Accent */}
+      <div className="absolute -bottom-2 -right-2 bg-cyan-500/10 border border-cyan-400/40 text-cyan-400 p-2 rounded-lg shadow-lg backdrop-blur-md">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
+        </svg>
+      </div>
     </div>
   );
 }
@@ -49,12 +94,19 @@ function InstitutionLogo({ src, title }) {
 function Education() {
   return (
     <Section id="education">
-      {/* Header */}
-      <div className="flex items-center gap-4 mb-12">
-        <h2 className="text-4xl font-bold text-slate-100 whitespace-nowrap">
-          <span className="text-cyan-400">/</span> education
-        </h2>
-        <div className="flex-1 h-px bg-slate-700" />
+      {/* Header with Graphic */}
+      <div className="flex items-center justify-between gap-6 mb-4">
+        <div className="flex items-center gap-4 flex-1">
+          <h2 className="text-4xl font-bold text-slate-100 whitespace-nowrap">
+            <span className="text-cyan-400">/</span> education
+          </h2>
+          <div className="flex-1 h-px bg-slate-700" />
+        </div>
+
+        {/* Animated CSE Graphic */}
+        <div className="hidden sm:block">
+          <AnimatedCodeTerminal />
+        </div>
       </div>
 
       {/* Aligned List */}
@@ -62,16 +114,26 @@ function Education() {
         {educationData.map((entry, i) => (
           <div
             key={entry.title}
-            className={`flex items-start gap-5 py-6 ${
-              i !== 0 ? 'border-t border-slate-800/80' : ''
+            className={`flex items-start gap-6 py-6 transition-all duration-700 ease-out animate-in fade-in slide-in-from-left-8 fill-mode-backwards ${
+              i !== 0 ? 'border-t border-slate-800/80' : 'pt-2'
             }`}
+            style={{ animationDelay: `${i * 150}ms` }}
           >
             <InstitutionLogo src={entry.logo} title={entry.title} />
             <div className="flex-1">
-              <h3 className="text-lg font-semibold text-slate-100">{entry.title}</h3>
-              <p className="text-slate-300 text-sm font-medium">{entry.subtitle}</p>
-              <p className="text-xs text-slate-500 my-1">{entry.dates}</p>
-              <p className="text-slate-400 text-sm leading-relaxed">{entry.details}</p>
+              <h3 className="text-xl md:text-2xl font-semibold text-slate-100">{entry.title}</h3>
+              <p className="text-cyan-400/90 text-base font-medium mt-0.5">{entry.subtitle}</p>
+              <p className="text-xs font-mono text-slate-400 my-1.5">{entry.dates}</p>
+
+              {entry.isHighSchool ? (
+                <div className="space-y-1.5 mt-2 text-slate-300 text-base leading-relaxed">
+                  <p className="font-medium text-slate-200">{entry.diplomaText}</p>
+                  <p>{entry.hlSubjects}</p>
+                  <p>{entry.slSubjects}</p>
+                </div>
+              ) : (
+                <p className="text-slate-300 text-base leading-relaxed max-w-4xl">{entry.details}</p>
+              )}
             </div>
           </div>
         ))}
