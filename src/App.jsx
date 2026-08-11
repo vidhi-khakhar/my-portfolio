@@ -1,10 +1,21 @@
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import About from './components/About';
+import Education from './components/Education';
+import Work from './components/Work';
+import Projects from './components/Projects';
+
 function App() {
   return (
     <div>
-      <h1>Vidhi Khakhar</h1>
-      <p>Computer Science and Engineering student at TU Delft!</p>
+      <Navbar />
+      <Home />
+      <About />
+      <Education />
+      <Work />
+      <Projects />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
