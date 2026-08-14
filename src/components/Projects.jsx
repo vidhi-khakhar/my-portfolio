@@ -12,7 +12,7 @@ const projectsData = [
     title: "Portfolio Website",
     description: "You're looking at it right now! This is a personal portfolio website built with React, Vite, and Tailwind CSS.",
     tech: ["React", "Vite", "Tailwind CSS"],
-    github: "https://github.com/yourusername/portfolio",
+    github: "https://github.com/vidhi-khakhar/my-portfolio",
     live: null,
     image: portfolioImg,
   },
