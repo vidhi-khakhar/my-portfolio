@@ -13,7 +13,7 @@ The portfolio website is built with **React** and **Tailwind CSS**.
 
 - **Framework / Library:** React 18
 - **Styling:** Tailwind CSS
-- **Icons & Assets:** Custom hand-written SVG components
+- **Icons & Assets:** AI-Generated SVG components
 - **Build Tooling:** Vite
 - **Deployment:** Vercel (with continuous deployment on push)
 
