@@ -13,15 +13,14 @@ function Home() {
   const [roleText, setRoleText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
-  const [phase, setPhase] = useState('greeting'); // greeting -> name -> rotating
+  const [phase, setPhase] = useState('greeting'); 
 
   const greeting = "Hello, world! My name is";
   const name = "Vidhi Khakhar";
-  const PAUSE_FULL = 2000;   // pause once a role is fully typed
+  const PAUSE_FULL = 2000;   
   const TYPE_SPEED = 65;
   const DELETE_SPEED = 65;
 
-  // Phase 1: type greeting
   useEffect(() => {
     let timeoutId;
     let i = 0;
@@ -39,7 +38,6 @@ function Home() {
     };
   }, []);
 
-  // Phase 2: type name, then hand off to rotating
   useEffect(() => {
     if (phase !== 'name') return;
     let timeoutId;
@@ -58,7 +56,6 @@ function Home() {
     };
   }, [phase]);
 
-  // Phase 3: rotating type/delete loop through roles, forever
   useEffect(() => {
     if (phase !== 'rotating') return;
 

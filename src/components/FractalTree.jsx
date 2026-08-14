@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
+// AI-generated Fractal Tree component for the Home page.
 function generateBranches(x, y, angle, length, depth, maxDepth, branches = []) {
   if (depth > maxDepth) return branches;
 

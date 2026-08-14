@@ -20,9 +20,9 @@ const projectsData = [
     title: "VRAAG - Enterprise Trading RAG Platform",
     description: "Designed and built a proof-of-concept RAG solution for Vattenfall's energy trading platform (VHP). Integrated codebase vector indexing, Azure DevOps sprint tracking, and automated documentation flows under the Vattenfall AI Platform (VAIP).",
     tech: ["Azure AI Foundry", "Copilot Studio", "Azure AI Search", "Power Automate", "PowerShell", "RAG"],
-    github: null, // Enterprise internal project
+    github: null, 
     live: null,
-    image: vattenfallImg, // Replace with import/path when image is generated
+    image: vattenfallImg,
   },
   {
     title: "FoodPal - Recipe Management Application",
@@ -64,7 +64,7 @@ function ProjectCard({ project }) {
   return (
     <div className="group bg-slate-900/90 border-2 border-slate-600/80 hover:border-white rounded-2xl overflow-hidden flex flex-col transition-all duration-300 shadow-2xl h-full">
       
-      {/* Top Image Preview Frame — Clean Bright White Background */}
+      {}
       <div className="p-3 bg-white border-b-2 border-slate-200">
         <div className="w-full h-48 bg-slate-100 rounded-xl overflow-hidden border border-slate-300 relative flex items-center justify-center shadow-inner">
           {project.image ? (
@@ -74,7 +74,7 @@ function ProjectCard({ project }) {
               className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
             />
           ) : (
-            /* Bright White/Slate Placeholder */
+            
             <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 p-6 relative">
               <div className="absolute inset-0 bg-[radial-gradient(#0f172a_1px,transparent_1px)] [background-size:16px_16px] opacity-10" />
               <span className="font-mono text-xs text-cyan-800 bg-cyan-100 border border-cyan-300 px-3 py-1 rounded-full mb-2 font-semibold">
@@ -124,7 +124,7 @@ function ProjectCard({ project }) {
           {project.description}
         </p>
 
-        {/* Crisp White/Slate Tech Badges */}
+        {}
         <div className="flex flex-wrap gap-2 mt-auto pt-2">
           {project.tech.map((t) => (
             <span

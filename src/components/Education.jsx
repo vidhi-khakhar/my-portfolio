@@ -1,6 +1,5 @@
 import Section from './Section';
 
-// Import your images from the assets folder
 import tudelftLogo from '../assets/tudelft-logo.png'; 
 import ishLogo from '../assets/ish-logo.jpg';
 import harvardLogo from '../assets/harvard-logo.png'; 
@@ -33,27 +32,31 @@ const educationData = [
   },
 ];
 
+// rounded square for icon
 function InstitutionLogo({ src, title }) {
   if (src) {
     return (
       <img
         src={src}
-        alt={title}
-        className="w-16 h-16 rounded-2xl object-contain bg-white p-2 border border-slate-700 shrink-0 shadow-md"
+        alt={`${title} logo`}
+        className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl object-contain bg-white p-2 border border-slate-700 shrink-0 shadow-md"
       />
     );
   }
   return (
-    <div className="w-16 h-16 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0 shadow-md">
+    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0 shadow-md">
       <span className="text-2xl font-bold text-cyan-400">{title.charAt(0)}</span>
     </div>
   );
 }
 
-// Custom Animated CSE Code Terminal Graphic
+// Custom Animated CSE Code Terminal Graphic, created by AI
 function AnimatedCodeTerminal() {
   return (
-    <div className="relative w-48 sm:w-56 h-32 bg-slate-900/90 border border-slate-700/80 rounded-xl p-3 shadow-xl backdrop-blur-sm shrink-0 mt-8 animate-[bounce_4s_infinite_ease-in-out]">
+    <div 
+      aria-hidden="true"
+      className="relative w-48 sm:w-56 h-32 bg-slate-900/90 border border-slate-700/80 rounded-xl p-3 shadow-xl backdrop-blur-sm shrink-0 mt-8 animate-[bounce_4s_infinite_ease-in-out]"
+    >
       {/* Terminal Window Header */}
       <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800">
         <div className="flex gap-1.5">
@@ -82,7 +85,7 @@ function AnimatedCodeTerminal() {
         </div>
       </div>
 
-      {/* Floating Bracket Icon Accent */}
+      {}
       <div className="absolute -bottom-2 -right-2 bg-cyan-500/10 border border-cyan-400/40 text-cyan-400 p-2 rounded-lg shadow-lg backdrop-blur-md">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
           <path strokeLinecap="round" strokeLinejoin="round" d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
@@ -95,30 +98,29 @@ function AnimatedCodeTerminal() {
 function Education() {
   return (
     <Section id="education">
-      {/* Header with Graphic */}
-      <div className="flex items-center justify-between gap-6 mb-4">
+      {}
+      <div className="flex items-center justify-between gap-6 mb-8 sm:mb-4">
         <div className="flex items-center gap-4 flex-1">
-          <h2 className="text-4xl font-bold text-slate-100 whitespace-nowrap">
-            <span className="text-cyan-400">/</span> education
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-100 whitespace-nowrap">
+            <span className="text-cyan-400" aria-hidden="true">/</span> education
           </h2>
-          <div className="flex-1 h-px bg-slate-700" />
+          <div className="flex-1 h-px bg-slate-700" aria-hidden="true" />
         </div>
 
-        {/* Animated CSE Graphic */}
+        {}
         <div className="hidden sm:block">
           <AnimatedCodeTerminal />
         </div>
       </div>
 
-      {/* Aligned List */}
+      {}
       <div className="w-full">
         {educationData.map((entry, i) => (
           <div
             key={entry.title}
-            className={`flex items-start gap-6 py-6 transition-all duration-700 ease-out animate-in fade-in slide-in-from-left-8 fill-mode-backwards ${
+            className={`flex items-start gap-4 sm:gap-6 py-6 transition-all duration-700 ease-out ${
               i !== 0 ? 'border-t border-slate-800/80' : 'pt-2'
             }`}
-            style={{ animationDelay: `${i * 150}ms` }}
           >
             <InstitutionLogo src={entry.logo} title={entry.title} />
             <div className="flex-1">
@@ -133,15 +135,11 @@ function Education() {
                   <p>{entry.slSubjects}</p>
                 </div>
               ) : (
-                <div className="space-y-1 mt-2 text-slate-300 text-base leading-relaxed max-w-4xl">
+                <div className="space-y-1.5 mt-2 text-slate-300 text-base leading-relaxed max-w-4xl">
                   {entry.diplomaText && (
                     <p className="font-semibold text-slate-100">{entry.diplomaText}</p>
                   )}
                   {entry.details && <p>{entry.details}</p>}
-                  {/* Final Grade line explicitly rendered in bold font */}
-                  {entry.gradeText && (
-                    <p className="font-bold text-slate-100 mt-1">{entry.gradeText}</p>
-                  )}
                 </div>
               )}
             </div>

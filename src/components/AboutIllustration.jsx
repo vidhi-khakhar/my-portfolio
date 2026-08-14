@@ -1,3 +1,4 @@
+// About Illutsration component created by AI.
 function Book({ cx, cy, angle }) {
   return (
     <g transform={`translate(${cx}, ${cy}) rotate(${angle})`}>

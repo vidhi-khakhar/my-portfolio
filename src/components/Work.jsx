@@ -61,13 +61,13 @@ function CompanyLogo({ src, title }) {
     return (
       <img
         src={src}
-        alt={title}
-        className="w-16 h-16 rounded-2xl object-contain bg-white p-2 border border-slate-700 shrink-0 shadow-md"
+        alt={`${title} logo`}
+        className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl object-contain bg-white p-2 border border-slate-700 shrink-0 shadow-md"
       />
     );
   }
   return (
-    <div className="w-16 h-16 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0 shadow-md">
+    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0 shadow-md">
       <span className="text-2xl font-bold text-cyan-400">{title.charAt(0)}</span>
     </div>
   );
@@ -75,8 +75,6 @@ function CompanyLogo({ src, title }) {
 
 function Work() {
   const [activeTab, setActiveTab] = useState('technology');
-  
-  // Track if user has clicked the Teaching tab yet
   const [hasClickedTeaching, setHasClickedTeaching] = useState(false);
 
   const handleTabChange = (tab) => {
@@ -92,18 +90,26 @@ function Work() {
     <Section id="work">
       {/* Header */}
       <div className="flex items-center gap-4 mb-8">
-        <h2 className="text-4xl font-bold text-slate-100 whitespace-nowrap">
-          <span className="text-cyan-400">/</span> work experience
+        <h2 className="text-3xl sm:text-4xl font-bold text-slate-100 whitespace-nowrap">
+          <span className="text-cyan-400" aria-hidden="true">/</span> work experience
         </h2>
-        <div className="flex-1 h-px bg-slate-700" />
+        <div className="flex-1 h-px bg-slate-700" aria-hidden="true" />
       </div>
 
       {/* Navigation Tabs */}
-      <div className="flex gap-3 mb-10 items-center">
+      <div 
+        role="tablist" 
+        aria-label="Work experience categories" 
+        className="flex flex-wrap gap-3 mb-10 items-center"
+      >
         {/* Technology Tab */}
         <button
+          role="tab"
+          id="tab-technology"
+          aria-selected={activeTab === 'technology'}
+          aria-controls="panel-work-list"
           onClick={() => handleTabChange('technology')}
-          className={`px-4 py-2 text-sm font-mono rounded-lg transition-all duration-200 border ${
+          className={`px-4 py-2 text-sm font-mono rounded-lg transition-all duration-200 border focus:outline-none focus:ring-2 focus:ring-cyan-400 ${
             activeTab === 'technology'
               ? 'bg-cyan-500/10 text-cyan-400 border-cyan-400/50 font-semibold'
               : 'bg-slate-800/40 text-slate-400 border-slate-700/50 hover:text-slate-200 hover:border-slate-600'
@@ -113,10 +119,14 @@ function Work() {
         </button>
 
         {/* Teaching & Mentorship Tab with One-Time White Hint */}
-        <div className="relative">
+        <div className="relative inline-flex items-center">
           <button
+            role="tab"
+            id="tab-teaching"
+            aria-selected={activeTab === 'teaching'}
+            aria-controls="panel-work-list"
             onClick={() => handleTabChange('teaching')}
-            className={`px-4 py-2 text-sm font-mono rounded-lg transition-all duration-200 border ${
+            className={`px-4 py-2 text-sm font-mono rounded-lg transition-all duration-200 border focus:outline-none focus:ring-2 focus:ring-cyan-400 ${
               activeTab === 'teaching'
                 ? 'bg-cyan-500/10 text-cyan-400 border-cyan-400/50 font-semibold'
                 : 'bg-slate-800/40 text-slate-300 border-slate-700/60 hover:text-white hover:border-slate-500'
@@ -125,9 +135,12 @@ function Work() {
             Teaching & Mentorship
           </button>
 
-          {/* One-time "click me" hint arrow in bright white */}
+          {/* One-time "click me" hint arrow */}
           {!hasClickedTeaching && activeTab !== 'teaching' && (
-            <div className="absolute left-full top-1/2 -translate-y-1/2 ml-3 flex items-center gap-1.5 text-white/90 text-xs font-mono pointer-events-none whitespace-nowrap animate-pulse drop-shadow-[0_0_6px_rgba(255,255,255,0.4)]">
+            <div 
+              aria-hidden="true"
+              className="hidden sm:flex absolute left-full top-1/2 -translate-y-1/2 ml-3 items-center gap-1.5 text-white/90 text-xs font-mono pointer-events-none whitespace-nowrap animate-pulse drop-shadow-[0_0_6px_rgba(255,255,255,0.4)]"
+            >
               <span className="text-sm font-bold">←</span>
               <span>click me</span>
             </div>
@@ -135,15 +148,14 @@ function Work() {
         </div>
       </div>
 
-      {/* Aligned List */}
-      <div className="w-full">
+      {/* Aligned List Panel */}
+      <div id="panel-work-list" role="tabpanel" aria-labelledby={`tab-${activeTab}`} className="w-full">
         {filteredWork.map((entry, i) => (
           <div
             key={`${entry.company}-${entry.title}`}
-            className={`flex items-start gap-6 py-8 transition-all duration-700 ease-out animate-in fade-in slide-in-from-left-8 fill-mode-backwards ${
+            className={`flex items-start gap-4 sm:gap-6 py-8 transition-all duration-700 ease-out ${
               i !== 0 ? 'border-t border-slate-800/80' : ''
             }`}
-            style={{ animationDelay: `${i * 150}ms` }}
           >
             <CompanyLogo src={entry.logo} title={entry.company} />
             
@@ -156,7 +168,7 @@ function Work() {
               {/* Dates */}
               <p className="text-xs font-mono text-slate-400 my-1.5">{entry.dates}</p>
 
-              {/* Description (Renders conditionally if present) */}
+              {/* Description */}
               {entry.description && (
                 <p className="text-slate-300 text-base leading-relaxed mb-3 max-w-4xl">
                   {entry.description}
