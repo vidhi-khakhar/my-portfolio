@@ -13,14 +13,6 @@ function GitIcon(props) {
   );
 }
 
-function SpringIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" {...props}>
-      <path d="M18.5 5.5c2.8 3.6 2.4 9.4-1.2 12.7-3.3 3-8.2 3.2-11.8.7 1.6.2 3.3-.2 4.6-1.2-3.6-.4-6.4-3.4-6.6-7 .8 1 2 1.7 3.3 1.9-2.6-1.7-3.4-5-1.9-7.7 2.9 3.5 7.2 5.7 11.9 6-0.4-1.7 0-3.6 1.7-5.4Z" />
-    </svg>
-  );
-}
-
 function NodeIcon(props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" {...props}>
@@ -79,6 +71,16 @@ function CssIcon(props) {
   );
 }
 
+function SqlIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <ellipse cx="12" cy="5" rx="9" ry="3" />
+      <path d="M3 5V19C3 20.6569 7.02944 22 12 22C16.9706 22 21 20.6569 21 19V5" />
+      <path d="M3 12C3 13.6569 7.02944 15 12 15C16.9706 15 21 13.6569 21 12" />
+    </svg>
+  );
+}
+
 function AssemblyIcon(props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -99,15 +101,15 @@ function ChevronIcon({ direction, ...props }) {
 
 const baseSkills = [
   { name: 'Java', Icon: JavaIcon, color: '#f89820' },
-  { name: 'Spring', Icon: SpringIcon, color: '#6db33f' },
-  { name: 'Git', Icon: GitIcon, color: '#f05033' },
   { name: 'Python', Icon: PythonIcon, color: '#3776ab' },
-  { name: 'x86-64 Assembly', Icon: AssemblyIcon, color: '#6b21a8' },
+  { name: 'Git', Icon: GitIcon, color: '#f05033' },
   { name: 'JavaScript', special: 'js' },
-  { name: 'Node.js', Icon: NodeIcon, color: '#5fa04e' },
-  { name: 'React', Icon: ReactIcon, color: '#61dafb' },
   { name: 'HTML', Icon: HtmlIcon, color: '#e34f26' },
   { name: 'CSS', Icon: CssIcon, color: '#1572b6' },
+  { name: 'Node.js', Icon: NodeIcon, color: '#5fa04e' },
+  { name: 'React', Icon: ReactIcon, color: '#61dafb' },
+  { name: 'SQL', Icon: SqlIcon, color: '#00758f' },
+  { name: 'Assembly x86-64', Icon: AssemblyIcon, color: '#6b21a8' }
 ];
 
 function SkillCard({ skill }) {
@@ -133,11 +135,17 @@ function SkillCard({ skill }) {
 function SkillsCarousel() {
   const total = baseSkills.length;
   const [itemsToShow, setItemsToShow] = useState(4);
-  const [index, setIndex] = useState(4);
-  const [withTransition, setWithTransition] = useState(true);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isManualAnimating, setIsManualAnimating] = useState(false);
 
-  // Monitor responsive screen sizes
+  const extendedSkills = [...baseSkills, ...baseSkills, ...baseSkills];
+
+  const posRef = useRef(total * (100 / itemsToShow));
+  const trackRef = useRef(null);
+  const requestRef = useRef(null);
+
+  const SPEED = 0.035; 
+
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth >= 1024) setItemsToShow(4);
@@ -149,44 +157,85 @@ function SkillsCarousel() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Triple the skills array for infinite buffer loops
-  const extendedSkills = [...baseSkills, ...baseSkills, ...baseSkills];
+  // Continuous linear movement when not hovered/animating
+  useEffect(() => {
+    const itemWidth = 100 / itemsToShow;
+    const singleSetWidth = total * itemWidth;
 
-  const next = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setWithTransition(true);
-    setIndex((prev) => prev + 1);
-  };
+    const animate = () => {
+      if (!isHovered && !isManualAnimating) {
+        posRef.current += SPEED;
 
-  const prev = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setWithTransition(true);
-    setIndex((prev) => prev - 1);
-  };
+        if (posRef.current >= singleSetWidth * 2) {
+          posRef.current -= singleSetWidth;
+        } else if (posRef.current < singleSetWidth) {
+          posRef.current += singleSetWidth;
+        }
 
-  // Seamlessly reset index when entering clone buffer zones
-  const handleTransitionEnd = () => {
-    if (index >= total + itemsToShow) {
-      setWithTransition(false);
-      setIndex(index - total);
-    } else if (index < itemsToShow) {
-      setWithTransition(false);
-      setIndex(index + total);
+        if (trackRef.current) {
+          trackRef.current.style.transform = `translateX(-${posRef.current}%)`;
+        }
+      }
+      requestRef.current = requestAnimationFrame(animate);
+    };
+
+    requestRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(requestRef.current);
+  }, [isHovered, isManualAnimating, itemsToShow, total]);
+
+  // Click handler to snap directly into aligned grid state
+  const moveBy = (direction) => {
+    if (isManualAnimating) return;
+
+    setIsManualAnimating(true);
+    const itemWidth = 100 / itemsToShow;
+    const singleSetWidth = total * itemWidth;
+    
+    // Calculate nearest exact card index to align perfectly
+    const currentCardIndex = direction > 0 
+      ? Math.floor(posRef.current / itemWidth) 
+      : Math.ceil(posRef.current / itemWidth);
+
+    const targetIndex = currentCardIndex + direction;
+    const targetPos = targetIndex * itemWidth;
+
+    if (trackRef.current) {
+      trackRef.current.style.transition = 'transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1)';
+      trackRef.current.style.transform = `translateX(-${targetPos}%)`;
     }
-    setIsAnimating(false);
+
+    setTimeout(() => {
+      posRef.current = targetPos;
+      
+      // Infinite loop boundary check
+      if (posRef.current >= singleSetWidth * 2) {
+        posRef.current -= singleSetWidth;
+      } else if (posRef.current < singleSetWidth) {
+        posRef.current += singleSetWidth;
+      }
+
+      if (trackRef.current) {
+        trackRef.current.style.transition = 'none';
+        trackRef.current.style.transform = `translateX(-${posRef.current}%)`;
+      }
+
+      setIsManualAnimating(false);
+    }, 300);
   };
 
   return (
     <div className="mt-8">
       <h3 className="text-xl font-bold text-slate-100 mb-4">Skills:</h3>
 
-      <div className="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-4 md:p-6 flex items-center gap-3 md:gap-4">
-        {/* Left Arrow Button */}
+      <div 
+        className="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-4 md:p-6 flex items-center gap-3 md:gap-4"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {/* Left Arrow */}
         <button
-          onClick={prev}
-          disabled={isAnimating}
+          onClick={() => moveBy(-1)}
+          disabled={isManualAnimating}
           aria-label="Previous skill"
           className="w-10 h-10 rounded-full bg-slate-700/80 hover:bg-slate-700 text-slate-200 hover:text-cyan-400 flex items-center justify-center shrink-0 transition-colors shadow-sm disabled:opacity-50"
         >
@@ -196,11 +245,11 @@ function SkillsCarousel() {
         {/* Carousel Window */}
         <div className="overflow-hidden flex-1 py-1">
           <div
-            className={`flex ${withTransition ? 'transition-transform duration-300 ease-out' : ''}`}
+            ref={trackRef}
+            className="flex"
             style={{
-              transform: `translateX(-${index * (100 / itemsToShow)}%)`,
+              transform: `translateX(-${posRef.current}%)`,
             }}
-            onTransitionEnd={handleTransitionEnd}
           >
             {extendedSkills.map((skill, i) => (
               <div
@@ -214,10 +263,10 @@ function SkillsCarousel() {
           </div>
         </div>
 
-        {/* Right Arrow Button */}
+        {/* Right Arrow */}
         <button
-          onClick={next}
-          disabled={isAnimating}
+          onClick={() => moveBy(1)}
+          disabled={isManualAnimating}
           aria-label="Next skill"
           className="w-10 h-10 rounded-full bg-slate-700/80 hover:bg-slate-700 text-slate-200 hover:text-cyan-400 flex items-center justify-center shrink-0 transition-colors shadow-sm disabled:opacity-50"
         >

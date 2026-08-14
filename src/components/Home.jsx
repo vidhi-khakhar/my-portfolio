@@ -1,24 +1,22 @@
-import { useCallback, useEffect, useState } from 'react';
+import { Callback, useEffect, useState } from 'react';
 import FractalTree from './FractalTree';
 
 const roles = [
   "BSc Computer Science and Engineering Student @ TU Delft",
   "Ex-AI Intern @ Vattenfall",
-  "Teaching Assistant",
+  "Teaching Assistant @ TU Delft",
 ];
 
 function Home() {
   const [greetingText, setGreetingText] = useState('');
   const [nameText, setNameText] = useState('');
-  const [iamText, setIamText] = useState('');
   const [roleText, setRoleText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
-  const [phase, setPhase] = useState('greeting'); // greeting -> name -> iam -> rotating
+  const [phase, setPhase] = useState('greeting'); // greeting -> name -> rotating
 
   const greeting = "Hello, world! My name is";
   const name = "Vidhi Khakhar";
-  const iamPrefix = "I am a";
   const PAUSE_FULL = 2000;   // pause once a role is fully typed
   const TYPE_SPEED = 65;
   const DELETE_SPEED = 65;
@@ -41,7 +39,7 @@ function Home() {
     };
   }, []);
 
-  // Phase 2: type name
+  // Phase 2: type name, then hand off to rotating
   useEffect(() => {
     if (phase !== 'name') return;
     let timeoutId;
@@ -51,7 +49,7 @@ function Home() {
       setNameText(name.slice(0, i));
       if (i >= name.length) {
         clearInterval(timer);
-        timeoutId = setTimeout(() => setPhase('iam'), 300);
+        timeoutId = setTimeout(() => setPhase('rotating'), 300);
       }
     }, 80);
     return () => {
@@ -60,26 +58,7 @@ function Home() {
     };
   }, [phase]);
 
-  // Phase 3: type "I am a" once, then hand off to rotating
-  useEffect(() => {
-    if (phase !== 'iam') return;
-    let timeoutId;
-    let i = 0;
-    const timer = setInterval(() => {
-      i++;
-      setIamText(iamPrefix.slice(0, i));
-      if (i >= iamPrefix.length) {
-        clearInterval(timer);
-        timeoutId = setTimeout(() => setPhase('rotating'), 200);
-      }
-    }, 50);
-    return () => {
-      clearInterval(timer);
-      if (timeoutId) clearTimeout(timeoutId);
-    };
-  }, [phase]);
-
-  // Phase 4: rotating type/delete loop through roles, forever
+  // Phase 3: rotating type/delete loop through roles, forever
   useEffect(() => {
     if (phase !== 'rotating') return;
 
@@ -126,10 +105,8 @@ function Home() {
           </h1>
 
           <p className="text-lg text-slate-400 font-mono mt-2 min-h-[1.75rem]">
-            {iamText}
-            {(phase === 'iam' || phase === 'rotating') && ' '}
             {phase === 'rotating' && roleText}
-            {(phase === 'iam' || phase === 'rotating') && (
+            {phase === 'rotating' && (
               <span className="text-cyan-400 animate-pulse ml-0.5">|</span>
             )}
           </p>

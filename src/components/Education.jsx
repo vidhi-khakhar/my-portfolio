@@ -3,14 +3,14 @@ import Section from './Section';
 // Import your images from the assets folder
 import tudelftLogo from '../assets/tudelft-logo.png'; 
 import ishLogo from '../assets/ish-logo.jpg';
-import harvardLogo from '../assets/harvard-logo.jpg'; 
+import harvardLogo from '../assets/harvard-logo.png'; 
 
 const educationData = [
   {
     dates: "2024 – 2027",
     title: "Delft University of Technology",
     subtitle: "Bachelor's degree, Computer Science and Engineering",
-    details: "Skills: Java, JavaScript, and more.",
+    details: "Skills: Machine Learning, Algorithms and Data Structures, Information and Data Management, Software Engineering Methods, and more.",
     logo: tudelftLogo,
   },
   {
@@ -25,9 +25,10 @@ const educationData = [
   },
   {
     dates: "2022 – 2023",
-    title: "Harvard Extension School",
+    title: "Harvard Business School - Summer Programme",
     subtitle: "Sustainable Product Design and the Innovation Ecosystem",
-    details: "Grade: A",
+    diplomaText: "Final Grade: A.  99/100.",
+    details: "Investigated how sustainable product design can give companies a competitive advantage, primarily through the use of technology. Created a business plan and presentation specifically on the industrial use cases for artificial and virtual reality (AR/VR) technologies.",
     logo: harvardLogo,
   },
 ];
@@ -132,7 +133,16 @@ function Education() {
                   <p>{entry.slSubjects}</p>
                 </div>
               ) : (
-                <p className="text-slate-300 text-base leading-relaxed max-w-4xl">{entry.details}</p>
+                <div className="space-y-1 mt-2 text-slate-300 text-base leading-relaxed max-w-4xl">
+                  {entry.diplomaText && (
+                    <p className="font-semibold text-slate-100">{entry.diplomaText}</p>
+                  )}
+                  {entry.details && <p>{entry.details}</p>}
+                  {/* Final Grade line explicitly rendered in bold font */}
+                  {entry.gradeText && (
+                    <p className="font-bold text-slate-100 mt-1">{entry.gradeText}</p>
+                  )}
+                </div>
               )}
             </div>
           </div>

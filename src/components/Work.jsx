@@ -17,7 +17,7 @@ const workData = [
       "Designed a cloud-based RAG Model proof of concept using Microsoft Azure (AI Foundry, AI Search, Blob Storage, Copilot Studio, Power Automate) to act as an expert in a complex, regulated energy trading platform.",
       "Explored the integration of DevOps data to accelerate software troubleshooting and improve project planning insights for both engineering and business stakeholders in a regulated enterprise environment."
     ],
-    skills: ["RAG", "Generative AI", "Microsoft Azure", "Copilot Studio", "Power Automate", "Workflow Optimization"],
+    skills: ["RAG", "Generative AI", "Microsoft Azure", "Copilot Studio", "Power Automate", "DevOps"],
     logo: vattenfallLogo,
   },
   {
@@ -75,6 +75,16 @@ function CompanyLogo({ src, title }) {
 
 function Work() {
   const [activeTab, setActiveTab] = useState('technology');
+  
+  // Track if user has clicked the Teaching tab yet
+  const [hasClickedTeaching, setHasClickedTeaching] = useState(false);
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    if (tab === 'teaching') {
+      setHasClickedTeaching(true);
+    }
+  };
 
   const filteredWork = workData.filter(entry => entry.category === activeTab);
 
@@ -89,9 +99,10 @@ function Work() {
       </div>
 
       {/* Navigation Tabs */}
-      <div className="flex gap-3 mb-10">
+      <div className="flex gap-3 mb-10 items-center">
+        {/* Technology Tab */}
         <button
-          onClick={() => setActiveTab('technology')}
+          onClick={() => handleTabChange('technology')}
           className={`px-4 py-2 text-sm font-mono rounded-lg transition-all duration-200 border ${
             activeTab === 'technology'
               ? 'bg-cyan-500/10 text-cyan-400 border-cyan-400/50 font-semibold'
@@ -100,16 +111,28 @@ function Work() {
         >
           Technology & Engineering
         </button>
-        <button
-          onClick={() => setActiveTab('teaching')}
-          className={`px-4 py-2 text-sm font-mono rounded-lg transition-all duration-200 border ${
-            activeTab === 'teaching'
-              ? 'bg-cyan-500/10 text-cyan-400 border-cyan-400/50 font-semibold'
-              : 'bg-slate-800/40 text-slate-400 border-slate-700/50 hover:text-slate-200 hover:border-slate-600'
-          }`}
-        >
-          Teaching & Mentorship
-        </button>
+
+        {/* Teaching & Mentorship Tab with One-Time White Hint */}
+        <div className="relative">
+          <button
+            onClick={() => handleTabChange('teaching')}
+            className={`px-4 py-2 text-sm font-mono rounded-lg transition-all duration-200 border ${
+              activeTab === 'teaching'
+                ? 'bg-cyan-500/10 text-cyan-400 border-cyan-400/50 font-semibold'
+                : 'bg-slate-800/40 text-slate-300 border-slate-700/60 hover:text-white hover:border-slate-500'
+            }`}
+          >
+            Teaching & Mentorship
+          </button>
+
+          {/* One-time "click me" hint arrow in bright white */}
+          {!hasClickedTeaching && activeTab !== 'teaching' && (
+            <div className="absolute left-full top-1/2 -translate-y-1/2 ml-3 flex items-center gap-1.5 text-white/90 text-xs font-mono pointer-events-none whitespace-nowrap animate-pulse drop-shadow-[0_0_6px_rgba(255,255,255,0.4)]">
+              <span className="text-sm font-bold">←</span>
+              <span>click me</span>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Aligned List */}
