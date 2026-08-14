@@ -1,4 +1,4 @@
-import { Callback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import FractalTree from './FractalTree';
 
 const roles = [
@@ -86,7 +86,7 @@ function Home() {
   return (
     <section id="home" className="min-h-[70vh] flex items-center px-8 pt-4 bg-slate-900 overflow-hidden">
       <div className="max-w-7xl mx-auto w-full flex items-center justify-between gap-12">
-        <div className="max-w-xl shrink-0">
+        <div className="w-full md:max-w-xl md:shrink-0">
           <p className="text-lg text-slate-400 font-mono min-h-[1.75rem]">
             {greetingText}
             {phase === 'greeting' && (

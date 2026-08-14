@@ -12,7 +12,6 @@ function GitIcon(props) {
     </svg>
   );
 }
-
 function NodeIcon(props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" aria-hidden="true" {...props}>
@@ -22,7 +21,6 @@ function NodeIcon(props) {
     </svg>
   );
 }
-
 function JavaIcon(props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true" {...props}>
@@ -32,7 +30,6 @@ function JavaIcon(props) {
     </svg>
   );
 }
-
 function PythonIcon(props) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
@@ -41,7 +38,6 @@ function PythonIcon(props) {
     </svg>
   );
 }
-
 function ReactIcon(props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true" {...props}>
@@ -52,7 +48,6 @@ function ReactIcon(props) {
     </svg>
   );
 }
-
 function HtmlIcon(props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
@@ -61,7 +56,6 @@ function HtmlIcon(props) {
     </svg>
   );
 }
-
 function CssIcon(props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
@@ -70,7 +64,6 @@ function CssIcon(props) {
     </svg>
   );
 }
-
 function SqlIcon(props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
@@ -80,7 +73,6 @@ function SqlIcon(props) {
     </svg>
   );
 }
-
 function AssemblyIcon(props) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
@@ -90,7 +82,6 @@ function AssemblyIcon(props) {
     </svg>
   );
 }
-
 function ChevronIcon({ direction, ...props }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
@@ -132,19 +123,46 @@ function SkillCard({ skill }) {
   );
 }
 
+function SkillsList() {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {baseSkills.map((skill) => {
+        if (skill.special === 'js') {
+          return (
+            <span
+              key={skill.name}
+              className="text-sm font-semibold text-slate-900 bg-[#f7df1e] rounded-full px-3 py-1.5"
+            >
+              JavaScript
+            </span>
+          );
+        }
+        const { name, Icon, color } = skill;
+        return (
+          <span
+            key={name}
+            className="flex items-center gap-1.5 text-sm font-medium bg-white rounded-full px-3 py-1.5"
+            style={{ color }}
+          >
+            <Icon className="w-4 h-4" />
+            {name}
+          </span>
+        );
+      })}
+    </div>
+  );
+}
+
 function SkillsCarousel() {
   const total = baseSkills.length;
   const [itemsToShow, setItemsToShow] = useState(4);
   const [isHovered, setIsHovered] = useState(false);
   const [isManualAnimating, setIsManualAnimating] = useState(false);
-
   const extendedSkills = [...baseSkills, ...baseSkills, ...baseSkills];
-
   const posRef = useRef(total * (100 / itemsToShow));
   const trackRef = useRef(null);
   const requestRef = useRef(null);
   const touchStartRef = useRef(0);
-
   const SPEED = 0.035;
 
   useEffect(() => {
@@ -161,65 +179,51 @@ function SkillsCarousel() {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
-
     const itemWidth = 100 / itemsToShow;
     const singleSetWidth = total * itemWidth;
-
     const animate = () => {
       if (!isHovered && !isManualAnimating) {
         posRef.current += SPEED;
-
         if (posRef.current >= singleSetWidth * 2) {
           posRef.current -= singleSetWidth;
         } else if (posRef.current < singleSetWidth) {
           posRef.current += singleSetWidth;
         }
-
         if (trackRef.current) {
           trackRef.current.style.transform = `translateX(-${posRef.current}%)`;
         }
       }
       requestRef.current = requestAnimationFrame(animate);
     };
-
     requestRef.current = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(requestRef.current);
   }, [isHovered, isManualAnimating, itemsToShow, total]);
 
-  // Step movement with manual animation lock
   const moveBy = (direction) => {
     if (isManualAnimating) return;
-
     setIsManualAnimating(true);
     const itemWidth = 100 / itemsToShow;
     const singleSetWidth = total * itemWidth;
-
-    const currentCardIndex = direction > 0 
-      ? Math.floor(posRef.current / itemWidth) 
+    const currentCardIndex = direction > 0
+      ? Math.floor(posRef.current / itemWidth)
       : Math.ceil(posRef.current / itemWidth);
-
     const targetIndex = currentCardIndex + direction;
     const targetPos = targetIndex * itemWidth;
-
     if (trackRef.current) {
       trackRef.current.style.transition = 'transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1)';
       trackRef.current.style.transform = `translateX(-${targetPos}%)`;
     }
-
     setTimeout(() => {
       posRef.current = targetPos;
-
       if (posRef.current >= singleSetWidth * 2) {
         posRef.current -= singleSetWidth;
       } else if (posRef.current < singleSetWidth) {
         posRef.current += singleSetWidth;
       }
-
       if (trackRef.current) {
         trackRef.current.style.transition = 'none';
         trackRef.current.style.transform = `translateX(-${posRef.current}%)`;
       }
-
       setIsManualAnimating(false);
     }, 300);
   };
@@ -242,14 +246,17 @@ function SkillsCarousel() {
     <div className="mt-8">
       <h3 className="text-xl font-bold text-slate-100 mb-4">Skills:</h3>
 
-      <div 
-        className="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-4 md:p-6 flex items-center gap-3 md:gap-4 touch-pan-y"
+      <div className="md:hidden">
+        <SkillsList />
+      </div>
+
+      <div
+        className="hidden md:flex bg-slate-800/60 border border-slate-700/50 rounded-2xl p-4 md:p-6 items-center gap-3 md:gap-4 touch-pan-y"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        {/* Left Arrow */}
         <button
           onClick={() => moveBy(-1)}
           disabled={isManualAnimating}
@@ -259,7 +266,6 @@ function SkillsCarousel() {
           <ChevronIcon direction="left" className="w-5 h-5" />
         </button>
 
-        {/* Carousel Window */}
         <div className="overflow-hidden flex-1 py-1">
           <div
             ref={trackRef}
@@ -280,7 +286,6 @@ function SkillsCarousel() {
           </div>
         </div>
 
-        {/* Right Arrow */}
         <button
           onClick={() => moveBy(1)}
           disabled={isManualAnimating}
