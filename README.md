@@ -1,16 +1,44 @@
-# React + Vite
+# Vidhi Khakhar — Personal Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the repository containing my portfolio site, my first React project. The portfolio showcases my technical skills, experiences, and projects.
 
-Currently, two official plugins are available:
+🚀 **Live Portfolio:** [vidhikhakhar.com](https://vidhikhakhar.com)  
+📂 **GitHub Repository:** [github.com/vidhikhakhar/portfolio](https://github.com/vidhikhakhar/portfolio)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🛠️ Built With
+The portfolio website is built with **React** and **Tailwind CSS**.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework / Library:** React 18
+- **Styling:** Tailwind CSS, PostCSS
+- **Icons & Assets:** Custom SVG Components, Lucide Icons
+- **Build Tooling:** Vite / Create React App
+- **Deployment:** Vercel (with continuous integration / CD)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Getting Started
+
+To run this project locally on your machine:
+
+### Prerequisites
+
+Ensure you have **Node.js** (v16 or higher) and **npm** installed.
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/vidhikhakhar/portfolio.git](https://github.com/vidhikhakhar/portfolio.git)
+   cd portfolio
+   
+2. **Install dependencies:**
+    npm install
+   
+3. **Start the development server:**
+    npm start
+    # or if using Vite:
+    npm run dev
+    
+    Open http://localhost:3000 (or http://localhost:5173 for Vite) in your browser to view the project.
