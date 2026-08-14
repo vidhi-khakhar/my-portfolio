@@ -8,13 +8,14 @@ This is the repository containing my portfolio site, my first React project. The
 ---
 
 ## 🛠️ Built With
+
 The portfolio website is built with **React** and **Tailwind CSS**.
 
 - **Framework / Library:** React 18
-- **Styling:** Tailwind CSS, PostCSS
-- **Icons & Assets:** Custom SVG Components, Lucide Icons
-- **Build Tooling:** Vite / Create React App
-- **Deployment:** Vercel (with continuous integration / CD)
+- **Styling:** Tailwind CSS
+- **Icons & Assets:** Custom hand-written SVG components
+- **Build Tooling:** Vite
+- **Deployment:** Vercel (with continuous deployment on push)
 
 ---
 
@@ -24,21 +25,24 @@ To run this project locally on your machine:
 
 ### Prerequisites
 
-Ensure you have **Node.js** (v16 or higher) and **npm** installed.
+Ensure you have **Node.js** (v18 or higher) and **npm** installed.
 
 ### Installation
 
 1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/vidhikhakhar/portfolio.git](https://github.com/vidhikhakhar/portfolio.git)
+```bash
+   git clone https://github.com/vidhikhakhar/portfolio.git
    cd portfolio
-   
+```
+
 2. **Install dependencies:**
-    npm install
-   
+```bash
+   npm install
+```
+
 3. **Start the development server:**
-    npm start
-    # or if using Vite:
-    npm run dev
-    
-    Open http://localhost:3000 (or http://localhost:5173 for Vite) in your browser to view the project.
+```bash
+   npm run dev
+```
+
+   Open `http://localhost:5173` in your browser to view the project.
