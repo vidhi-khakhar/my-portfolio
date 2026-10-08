@@ -3,10 +3,30 @@ import { workData } from '../data/workData';
 import WorkRow from '../components/WorkRow';
 
 const tabs = [
-  { key: 'all', label: 'All work' },
-  { key: 'project', label: 'Projects' },
-  { key: 'experience', label: 'Experience' },
-  { key: 'education', label: 'Education' },
+  {
+    key: 'all',
+    label: 'All work',
+    title: 'Work',
+    description: 'My Projects, Experience, and Education',
+  },
+  {
+    key: 'project',
+    label: 'Projects',
+    title: 'Projects',
+    description: 'Software Programming: Full-Stack',
+  },
+  {
+    key: 'experience',
+    label: 'Experience',
+    title: 'Experience',
+    description: 'Software Engineering Roles, Internships, and Research',
+  },
+  {
+    key: 'education',
+    label: 'Education',
+    title: 'Education',
+    description: 'Degrees, Programmes, and Coursework',
+  },
 ];
 
 const groups = [
@@ -18,7 +38,8 @@ const groups = [
 function WorkPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const requested = searchParams.get('tab');
-  const active = tabs.some((t) => t.key === requested) ? requested : 'all';
+  const activeTab = tabs.find((t) => t.key === requested) ?? tabs[0];
+  const active = activeTab.key;
 
   const selectTab = (key) => {
     setSearchParams(key === 'all' ? {} : { tab: key }, { replace: true });
@@ -32,8 +53,8 @@ function WorkPage() {
         <p className="text-xs font-semibold uppercase tracking-wider text-cyan-400">
           Projects, experience &amp; education
         </p>
-        <h1 className="mt-3 text-5xl font-bold text-white">Work</h1>
-        <p className="mt-3 text-slate-300">My projects, experience, and education.</p>
+        <h1 className="mt-3 text-5xl font-bold text-white">{activeTab.title}</h1>
+        <p className="mt-3 text-slate-300">{activeTab.description}</p>
 
         <div className="mt-8 flex flex-wrap gap-6 border-b border-slate-700">
           {tabs.map((tab) => (

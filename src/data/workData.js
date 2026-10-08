@@ -11,7 +11,7 @@ export const workData = [
     type: 'project',
     title: 'Personal portfolio website',
     summary: 'This site: a React portfolio with hand-built animations, deployed on Vercel.',
-    period: '2026',
+    period: 'June 2026 - Ongoing',
     technologies: ['React', 'Vite', 'Tailwind CSS'],
     overview:
       'A portfolio built from scratch with React, Vite, and Tailwind CSS. The typewriter intro, the fractal tree, and the skills carousel are all written by hand, without animation libraries.',
@@ -45,7 +45,7 @@ export const workData = [
     type: 'project',
     title: 'FoodPal: Recipe Management Application',
     summary: 'A full-stack Java desktop app for organizing and sharing recipes.',
-    period: 'TODO',
+    period: 'Dec 2025 - Jan 2026',
     technologies: ['Java', 'JavaFX', 'Spring Boot', 'REST API', 'Maven'],
     overview:
       'A full-stack Java desktop application to organize and share recipes. Users collaborate through a distributed server built with Spring Boot, while personal favorites and shopping lists are managed locally in a JavaFX client.',
@@ -61,7 +61,7 @@ export const workData = [
     type: 'project',
     title: 'Echo Cat: An x86 Assembly Game',
     summary: 'A Chrome Dinosaur spinoff written in x86-64 Assembly.',
-    period: 'TODO',
+    period: 'Sep 2025 – Nov 2025',
     technologies: ['Assembly x86-64', 'raylib', 'Linux'],
     overview:
       'An Assembly x86-64 spinoff of the Chrome Dinosaur game, created for the CSE1400 Computer Organization course at TU Delft together with a classmate.',
