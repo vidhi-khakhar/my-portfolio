@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const navLinks = [
-  { id: 'home', label: 'Home' },
-  { id: 'about', label: 'About' },
-  { id: 'education', label: 'Education' },
-  { id: 'work', label: 'Work' },
-  { id: 'projects', label: 'Projects' },
+  { to: '/', label: 'Home' },
+  { to: '/#about', label: 'About' },
+  { to: '/#education', label: 'Education' },
+  { to: '/#work', label: 'Work' },
+  { to: '/#projects', label: 'Projects' },
 ];
 
 const socialLinks = [
@@ -73,14 +74,13 @@ function Navbar() {
         <nav aria-label="Main Navigation" className="hidden md:flex items-center gap-8">
           <ul className="flex items-center gap-6">
             {navLinks.map((link) => (
-              <li key={link.id}>
-                <a
-                  href={`#${link.id}`}
-                  className="text-slate-300 hover:text-cyan-400 transition-colors text-sm font-medium focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded"
-                >
-                  {link.label}
-                </a>
-              </li>
+              <Link
+                key={link.to}
+                to={link.to}
+                className="text-slate-300 hover:text-cyan-400 transition-colors text-sm"
+              >
+                {link.label}
+              </Link>
             ))}
           </ul>
         </nav>
@@ -127,15 +127,14 @@ function Navbar() {
         >
           <ul className="flex flex-col items-center gap-3 w-full">
             {navLinks.map((link) => (
-              <li key={link.id} className="w-full text-center">
-                <a
-                  href={`#${link.id}`}
-                  className="block py-2 text-slate-300 hover:text-cyan-400 text-base font-medium transition-colors"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.label}
-                </a>
-              </li>
+              <Link
+                key={link.to}
+                to={link.to}
+                className="py-1 text-slate-300 hover:text-cyan-400"
+                onClick={() => setIsOpen(false)}
+              >
+                {link.label}
+              </Link>
             ))}
           </ul>
 
