@@ -1,0 +1,177 @@
+export const typeLabel = {
+  project: 'Project',
+  experience: 'Experience',
+  education: 'Education',
+};
+
+export const workData = [
+  // PROJECTS (newest first)
+  {
+    slug: 'portfolio-website',
+    type: 'project',
+    title: 'Personal portfolio website',
+    summary: 'This site: a React portfolio with hand-built animations, deployed on Vercel.',
+    period: '2026',
+    technologies: ['React', 'Vite', 'Tailwind CSS'],
+    overview:
+      'A portfolio built from scratch with React, Vite, and Tailwind CSS. The typewriter intro, the fractal tree, and the skills carousel are all written by hand, without animation libraries.',
+    bullets: [
+      'Built responsive, mobile-first layouts for every section.',
+      'Set up continuous deployment on Vercel, an XML sitemap, and Google Search Console.',
+      'Added client-side routing so the CV, projects, and experience have their own pages.',
+    ],
+    link: 'https://github.com/vidhi-khakhar/my-portfolio',
+    related: [],
+  },
+  {
+    slug: 'vraag',
+    type: 'project',
+    title: 'VRAAG: Enterprise Trading RAG Platform',
+    summary: "A proof-of-concept RAG assistant for Vattenfall's energy trading platform.",
+    period: 'Aug 2025 – Nov 2025',
+    technologies: ['Azure AI Foundry', 'Azure AI Search', 'Copilot Studio', 'Power Automate', 'RAG'],
+    overview:
+      "A proof-of-concept RAG solution for Vattenfall's energy trading platform (VHP). It combines vector-indexed source code, Azure DevOps sprint tracking, and automated documentation flows under the Vattenfall AI Platform (VAIP).",
+    bullets: [
+      'Built a cloud-based proof of concept that connects vector-indexed source code with Azure DevOps data.',
+      'Evaluated the system on representative developer workflows and documented its design and limitations.',
+      'Delivered the proof of concept together with design, build, and testing documentation.',
+    ],
+    link: null,
+    related: ['vattenfall'],
+  },
+  {
+    slug: 'foodpal',
+    type: 'project',
+    title: 'FoodPal: Recipe Management Application',
+    summary: 'A full-stack Java desktop app for organizing and sharing recipes.',
+    period: 'TODO',
+    technologies: ['Java', 'JavaFX', 'Spring Boot', 'REST API', 'Maven'],
+    overview:
+      'A full-stack Java desktop application to organize and share recipes. Users collaborate through a distributed server built with Spring Boot, while personal favorites and shopping lists are managed locally in a JavaFX client.',
+    bullets: [
+      'Distributed server built with Spring Boot and a REST API.',
+      'JavaFX client that keeps personal favorites and shopping lists locally.',
+    ],
+    link: null,
+    related: [],
+  },
+  {
+    slug: 'echo-cat',
+    type: 'project',
+    title: 'Echo Cat: An x86 Assembly Game',
+    summary: 'A Chrome Dinosaur spinoff written in x86-64 Assembly.',
+    period: 'TODO',
+    technologies: ['Assembly x86-64', 'raylib', 'Linux'],
+    overview:
+      'An Assembly x86-64 spinoff of the Chrome Dinosaur game, created for the CSE1400 Computer Organization course at TU Delft together with a classmate.',
+    bullets: [
+      'Implemented the game in x86-64 Assembly, using the raylib graphics library.',
+      'Developed and run on Linux as part of the Computer Organization course.',
+    ],
+    link: null,
+    related: ['tu-delft'],
+  },
+
+  // EXPERIENCE (newest first)
+  {
+    slug: 'tu-delft-ta-mentor',
+    type: 'experience',
+    title: 'TU Delft',
+    subtitle: 'Teaching Assistant and Student Mentor',
+    summary: 'Supporting students in programming, computer organization, and logic courses, and mentoring first-year students.',
+    period: 'Sep 2026 – Jul 2027',
+    technologies: ['Java', 'Assembly x86-64', 'Formal logic', 'Mentorship', 'Community building'],
+    overview: null,
+    bullets: [
+      'Teaching assistant for Introduction to Programming (Java), Computer Organization (Assembly x86-64, logic gates, binary representation), and Reasoning and Logic (propositional and predicate logic, proofs).',
+      'Guide students by identifying misconceptions, asking targeted questions, and turning complex concepts into clear explanations.',
+      'Grade assignments and exams against academic criteria, giving structured feedback and keeping marking consistent across large cohorts.',
+      'As a student mentor, facilitate weekly academic and social support meetings for a cohort of first-year students, advising on study strategies, navigating the university, and building community.',
+    ],
+    link: null,
+    related: ['tu-delft'],
+  },
+  {
+    slug: 'vattenfall',
+    type: 'experience',
+    title: 'Vattenfall',
+    subtitle: 'AI Intern',
+    summary: 'Researched and prototyped a RAG assistant for a regulated energy-trading platform.',
+    period: 'Aug 2025 – Nov 2025',
+    technologies: ['Azure', 'AI Foundry', 'AI Search', 'Copilot Studio', 'Power Automate'],
+    overview: null,
+    bullets: [
+      'Analyzed developer workflows and information bottlenecks on the platform.',
+      'Worked with Data Privacy and Security Officers to address governance requirements and secure approval to use the enterprise AI platform.',
+      'Documented the design, build, and testing of the resulting proof of concept (see VRAAG).',
+    ],
+    link: null,
+    related: ['vraag'],
+  },
+  {
+    slug: 'tutor',
+    type: 'experience',
+    title: 'Private Tutoring',
+    subtitle: 'Tutor',
+    summary: 'Tutored IB Diploma students in Mathematics and Physics.',
+    period: '2024 – 2025',
+    technologies: ['Mathematics', 'Physics', 'IBDP', '1-on-1 instruction'],
+    overview: null,
+    bullets: [
+      'Tutored students in the two-year pre-university IB Diploma Programme.',
+      'Broke down complex concepts in Mathematics and Physics to improve understanding and performance.',
+    ],
+    link: null,
+    related: [],
+  },
+
+  // EDUCATION
+  {
+    slug: 'tu-delft',
+    type: 'education',
+    title: 'Delft University of Technology',
+    subtitle: 'BSc Computer Science and Engineering',
+    summary: 'Focused on algorithms, machine learning, and large-scale data systems.',
+    period: '2024 – 2027',
+    technologies: ['Algorithms and Data Structures', 'Machine Learning', 'Software Engineering Methods', 'Information and Data Management'],
+    overview: null,
+    bullets: [
+      'Teaching assistant and student mentor at the university (see Experience).',
+    ],
+    link: null,
+    related: ['tu-delft-ta-mentor', 'echo-cat'],
+  },
+  {
+    slug: 'ish',
+    type: 'education',
+    title: 'International School of The Hague',
+    subtitle: 'International Baccalaureate Diploma',
+    summary: 'Graduated with an IB Diploma and a bilingual English and Dutch diploma.',
+    period: '2009 – May 2024',
+    technologies: ['HL Computer Science', 'HL Business Management', 'HL Mathematics: Analysis & Approaches'],
+    overview: null,
+    bullets: [
+      'Bilingual Diploma in English and Dutch Language and Literature.',
+      'Standard Level: Physics, English A Language & Literature, Dutch A Language & Literature.',
+    ],
+    link: null,
+    related: [],
+  },
+  {
+    slug: 'harvard',
+    type: 'education',
+    title: 'Harvard Business School',
+    subtitle: 'Summer Programme: Sustainable Product Design and the Innovation Ecosystem',
+    summary: 'A programme on how sustainable design creates competitive advantage through technology.',
+    period: '2022 – 2023',
+    technologies: ['Sustainable design', 'Innovation', 'AR/VR'],
+    overview: null,
+    bullets: [
+      'Final grade: A (99/100).',
+      'Built a business plan and presentation on industrial use cases for AR/VR technologies.',
+    ],
+    link: null,
+    related: [],
+  },
+];

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 // AI-generated Fractal Tree component for the Home page.
 function generateBranches(x, y, angle, length, depth, maxDepth, branches = []) {
@@ -49,26 +49,37 @@ function FractalTree({ width = 500, height = 650, maxDepth = 9 }) {
     return () => cancelAnimationFrame(frameRef.current);
   }, [maxDepth]);
 
-  const branches = generateBranches(width / 2, height, Math.PI / 2, height * 0.22, 0, maxDepth);
+    // Computed once, grouped by depth (width and opacity only depend on depth)
+  const levels = useMemo(() => {
+    const all = generateBranches(width / 2, height, Math.PI / 2, height * 0.22, 0, maxDepth);
+    const byDepth = Array.from({ length: maxDepth + 1 }, () => []);
+    all.forEach((b) => byDepth[b.depth].push(b));
+    return byDepth;
+  }, [width, height, maxDepth]);
 
   return (
     <svg width={width} height={height}>
-      {branches.map((b, i) => {
-        const reveal = Math.max(0, Math.min(1, growth - b.depth));
-        const x2 = b.x1 + (b.x2 - b.x1) * reveal;
-        const y2 = b.y1 + (b.y2 - b.y1) * reveal;
+      {levels.map((branches, depth) => {
+        const reveal = Math.max(0, Math.min(1, growth - depth));
+        if (reveal === 0) return null;
+
+        const d = branches
+          .map((b) => {
+            const x2 = b.x1 + (b.x2 - b.x1) * reveal;
+            const y2 = b.y1 + (b.y2 - b.y1) * reveal;
+            return `M${b.x1.toFixed(1)} ${b.y1.toFixed(1)}L${x2.toFixed(1)} ${y2.toFixed(1)}`;
+          })
+          .join('');
 
         return (
-          <line
-            key={i}
-            x1={b.x1}
-            y1={b.y1}
-            x2={x2}
-            y2={y2}
+          <path
+            key={depth}
+            d={d}
+            fill="none"
             stroke="#f1f5f9"
-            strokeWidth={Math.max(1, (maxDepth - b.depth) * 0.6)}
+            strokeWidth={Math.max(1, (maxDepth - depth) * 0.6)}
             strokeLinecap="round"
-            opacity={0.2 + (1 - b.depth / maxDepth) * 0.5}
+            opacity={0.35 + (1 - depth / maxDepth) * 0.65}
           />
         );
       })}

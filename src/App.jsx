@@ -8,6 +8,7 @@ import Work from './components/Work';
 import Projects from './components/Projects';
 import Footer from './components/Footer';
 import CvPage from './pages/CvPage';
+import WorkPage from './pages/WorkPage';
 
 function HomePage() {
   return (
@@ -29,6 +30,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/cv" element={<CvPage />} />
+        <Route path="/work" element={<WorkPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Footer />
