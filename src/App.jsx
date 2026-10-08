@@ -7,6 +7,7 @@ import Education from './components/Education';
 import Work from './components/Work';
 import Projects from './components/Projects';
 import Footer from './components/Footer';
+import CvPage from './pages/CvPage';
 
 function HomePage() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <ScrollManager />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/cv" element={<CvPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Footer />

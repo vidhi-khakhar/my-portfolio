@@ -7,6 +7,7 @@ const navLinks = [
   { to: '/#education', label: 'Education' },
   { to: '/#work', label: 'Work' },
   { to: '/#projects', label: 'Projects' },
+  { to: '/cv', label: 'CV' },
 ];
 
 const socialLinks = [
@@ -63,24 +64,25 @@ function Navbar() {
     <header className="fixed top-0 left-0 w-full bg-slate-900/80 backdrop-blur-md z-50 border-b border-slate-800/80 shadow-sm">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {}
-        <a 
-          href="#home" 
+        <Link
+          to="/"
           className="font-bold text-lg text-slate-100 hover:text-cyan-400 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded-md"
         >
           Vidhi Khakhar
-        </a>
+        </Link>
 
         {}
         <nav aria-label="Main Navigation" className="hidden md:flex items-center gap-8">
           <ul className="flex items-center gap-6">
             {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className="text-slate-300 hover:text-cyan-400 transition-colors text-sm"
-              >
-                {link.label}
-              </Link>
+              <li key={link.to}>
+                <Link
+                  to={link.to}
+                  className="text-slate-300 hover:text-cyan-400 transition-colors text-sm"
+                >
+                  {link.label}
+                </Link>
+              </li>
             ))}
           </ul>
         </nav>
@@ -127,14 +129,15 @@ function Navbar() {
         >
           <ul className="flex flex-col items-center gap-3 w-full">
             {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className="py-1 text-slate-300 hover:text-cyan-400"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.label}
-              </Link>
+              <li key={link.to}>
+                <Link
+                  to={link.to}
+                  className="py-1 text-slate-300 hover:text-cyan-400"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              </li>
             ))}
           </ul>
 

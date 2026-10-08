@@ -23,7 +23,7 @@ function FractalTree({ width = 500, height = 650, maxDepth = 9 }) {
 
   useEffect(() => {
     const GROW = 8;      // seconds to grow out
-    const HOLD = 20;     // seconds fully grown
+    const HOLD = 3;     // seconds fully grown
     const RETRACT = 8;   // seconds to pull back in
     const CYCLE = GROW + HOLD + RETRACT;
 
