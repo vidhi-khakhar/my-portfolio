@@ -1,18 +1,30 @@
 @import "tailwindcss";
+@theme {
+  --color-slate-100: #ffffff;
+  --color-slate-200: #f8fafc;
+  --color-slate-300: #f1f5f9;
+  --color-slate-400: #e2e8f0;
+  --color-slate-500: #cbd5e1;
+
+  --color-slate-700: #3a4d75;
+  --color-slate-800: #26375a;
+  --color-slate-900: #1a2744;
+}
 
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: #0f172a;
-  color: #e2e8f0;
+  background-color: #1a2744;
+  color: #f8fafc;
 }
 
 @keyframes spin-cw {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
 
 @keyframes spin-ccw {
   from { transform: rotate(0deg); }
@@ -22,4 +34,9 @@ body {
 @keyframes gentle-float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
+}
+
+@keyframes code-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
 }

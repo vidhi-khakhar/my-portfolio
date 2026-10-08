@@ -22,15 +22,26 @@ function FractalTree({ width = 500, height = 650, maxDepth = 9 }) {
   const frameRef = useRef();
 
   useEffect(() => {
+    const GROW = 8;      // seconds to grow out
+    const HOLD = 20;     // seconds fully grown
+    const RETRACT = 8;   // seconds to pull back in
+    const CYCLE = GROW + HOLD + RETRACT;
+
+    // smoothstep: starts and ends slowly instead of moving at a constant speed
+    const ease = (x) => x * x * (3 - 2 * x);
+
     let start;
-    const cycleSeconds = 6;
 
     function animate(timestamp) {
       if (!start) start = timestamp;
-      const elapsed = (timestamp - start) / 1000;
-      const t = (elapsed % cycleSeconds) / cycleSeconds;
-      const wave = t < 0.5 ? t * 2 : (1 - t) * 2; // 0 -> 1 -> 0, repeating
-      setGrowth(wave * (maxDepth + 1));
+      const t = ((timestamp - start) / 1000) % CYCLE;
+
+      let progress;
+      if (t < GROW) progress = ease(t / GROW);
+      else if (t < GROW + HOLD) progress = 1;
+      else progress = ease(1 - (t - GROW - HOLD) / RETRACT);
+
+      setGrowth(progress * (maxDepth + 1));
       frameRef.current = requestAnimationFrame(animate);
     }
 
@@ -54,7 +65,7 @@ function FractalTree({ width = 500, height = 650, maxDepth = 9 }) {
             y1={b.y1}
             x2={x2}
             y2={y2}
-            stroke="#2563eb"
+            stroke="#f1f5f9"
             strokeWidth={Math.max(1, (maxDepth - b.depth) * 0.6)}
             strokeLinecap="round"
             opacity={0.2 + (1 - b.depth / maxDepth) * 0.5}

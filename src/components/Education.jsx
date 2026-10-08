@@ -32,62 +32,50 @@ const educationData = [
   },
 ];
 
-// rounded square for icon
-function InstitutionLogo({ src, title }) {
-  if (src) {
-    return (
-      <img
-        src={src}
-        alt={`${title} logo`}
-        className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl object-contain bg-white p-2 border border-slate-700 shrink-0 shadow-md"
-      />
-    );
-  }
-  return (
-    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0 shadow-md">
-      <span className="text-2xl font-bold text-cyan-400">{title.charAt(0)}</span>
-    </div>
-  );
-}
 
 // Custom Animated CSE Code Terminal Graphic, created by AI
 function AnimatedCodeTerminal() {
   return (
-    <div 
+    <div
       aria-hidden="true"
-      className="relative w-48 sm:w-56 h-32 bg-slate-900/90 border border-slate-700/80 rounded-xl p-3 shadow-xl backdrop-blur-sm shrink-0 mt-8 animate-[bounce_4s_infinite_ease-in-out]"
+      className="relative w-64 shrink-0 mt-8"
+      style={{ animation: 'code-bounce 3s ease-in-out infinite' }}
     >
-      {/* Terminal Window Header */}
-      <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800">
-        <div className="flex gap-1.5">
-          <div className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
-          <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
-          <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+      <div className="flex aspect-[7/4] flex-col rounded-xl bg-white p-4 shadow-lg shadow-black/30">
+        {/* Title bar */}
+        <div className="mb-4 flex items-center justify-between border-b border-[#e2e8f0] pb-2">
+          <div className="flex gap-1.5">
+            <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
+            <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
+            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
+          </div>
+          <span className="font-mono text-[10px] text-[#64748b]">CSEStudent.cs</span>
         </div>
-        <span className="text-[10px] font-mono text-slate-500">cse_student.cs</span>
+
+        {/* Code */}
+        <div className="whitespace-nowrap font-mono text-xs leading-4 text-slate-900">
+          <div>
+            <span className="font-semibold text-violet-600">class</span>{' '}
+            <span className="text-amber-600">CSEStudent</span> {'{'}
+          </div>
+          <div className="pl-4">
+            <span className="text-cyan-700">string</span> status ={' '}
+            <span className="font-semibold text-emerald-600">{'"learning"'}</span>;
+          </div>
+          <div>{'}'}</div>
+        </div>
+
+        {/* Terminal line, pinned to the bottom of the card */}
+        <div className="mt-auto flex items-center gap-1.5 font-mono text-xs leading-4 text-slate-900">
+          <span className="text-cyan-700">&gt;</span>
+          <span>compiling</span>
+          <span className="inline-block h-3 w-1.5 animate-pulse bg-cyan-500" />
+        </div>
       </div>
 
-      {/* Code Lines with Blinking Cursor */}
-      <div className="space-y-1.5 font-mono text-xs">
-        <div className="flex items-center gap-1">
-          <span className="text-purple-400 font-semibold">class</span>
-          <span className="text-amber-300">CSStudent</span>
-          <span className="text-slate-400">{'{}'}</span>
-        </div>
-        <div className="flex items-center gap-1.5 pl-3">
-          <span className="text-cyan-400">status:</span>
-          <span className="text-emerald-400 font-semibold">'learning'</span>
-        </div>
-        <div className="flex items-center gap-1 pl-3">
-          <span className="text-slate-400">&gt;</span>
-          <span className="text-slate-300">compiling</span>
-          <span className="w-1.5 h-3 bg-cyan-400 inline-block animate-pulse ml-0.5" />
-        </div>
-      </div>
-
-      {}
-      <div className="absolute -bottom-2 -right-2 bg-cyan-500/10 border border-cyan-400/40 text-cyan-400 p-2 rounded-lg shadow-lg backdrop-blur-md">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+      {/* Code icon badge */}
+      <div className="absolute -bottom-3 -right-3 rounded-lg bg-cyan-400 p-2 text-slate-900 shadow-lg shadow-black/30">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="h-5 w-5">
           <path strokeLinecap="round" strokeLinejoin="round" d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
         </svg>
       </div>
@@ -95,11 +83,27 @@ function AnimatedCodeTerminal() {
   );
 }
 
+function InstitutionLogo({ src, title }) {
+  if (src) {
+    return (
+      <img
+        src={src}
+        alt={`${title} logo`}
+        className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl object-contain bg-white p-1.5 border border-slate-700 shrink-0 shadow-md"
+      />
+    );
+  }
+  return (
+    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0 shadow-md">
+      <span className="text-xl font-bold text-cyan-400">{title.charAt(0)}</span>
+    </div>
+  );
+}
+
 function Education() {
   return (
     <Section id="education">
-      {}
-      <div className="flex items-center justify-between gap-6 mb-8 sm:mb-4">
+      <div className="flex items-center justify-between gap-6 mb-4 sm:mb-2">
         <div className="flex items-center gap-4 flex-1">
           <h2 className="text-3xl sm:text-4xl font-bold text-slate-100 whitespace-nowrap">
             <span className="text-cyan-400" aria-hidden="true">/</span> education
@@ -107,35 +111,33 @@ function Education() {
           <div className="flex-1 h-px bg-slate-700" aria-hidden="true" />
         </div>
 
-        {}
         <div className="hidden sm:block">
           <AnimatedCodeTerminal />
         </div>
       </div>
 
-      {}
       <div className="w-full">
         {educationData.map((entry, i) => (
           <div
             key={entry.title}
-            className={`flex items-start gap-4 sm:gap-6 py-6 transition-all duration-700 ease-out ${
+            className={`flex items-start gap-4 sm:gap-5 py-4 transition-all duration-700 ease-out ${
               i !== 0 ? 'border-t border-slate-800/80' : 'pt-2'
             }`}
           >
             <InstitutionLogo src={entry.logo} title={entry.title} />
             <div className="flex-1">
-              <h3 className="text-xl md:text-2xl font-semibold text-slate-100">{entry.title}</h3>
-              <p className="text-cyan-400/90 text-base font-medium mt-0.5">{entry.subtitle}</p>
-              <p className="text-xs font-mono text-slate-400 my-1.5">{entry.dates}</p>
+              <h3 className="text-lg md:text-xl font-semibold text-slate-100">{entry.title}</h3>
+              <p className="text-cyan-400/90 text-sm md:text-base font-medium">{entry.subtitle}</p>
+              <p className="text-xs font-mono text-slate-400 my-1">{entry.dates}</p>
 
               {entry.isHighSchool ? (
-                <div className="space-y-1.5 mt-2 text-slate-300 text-base leading-relaxed">
+                <div className="space-y-1 mt-1.5 text-slate-300 text-sm md:text-base leading-snug">
                   <p className="font-medium text-slate-200">{entry.diplomaText}</p>
                   <p>{entry.hlSubjects}</p>
                   <p>{entry.slSubjects}</p>
                 </div>
               ) : (
-                <div className="space-y-1.5 mt-2 text-slate-300 text-base leading-relaxed max-w-4xl">
+                <div className="space-y-1 mt-1.5 text-slate-300 text-sm md:text-base leading-snug max-w-4xl">
                   {entry.diplomaText && (
                     <p className="font-semibold text-slate-100">{entry.diplomaText}</p>
                   )}
