@@ -10,16 +10,16 @@ const tabs = [
     description: 'My Projects, Experience, and Education',
   },
   {
-    key: 'project',
-    label: 'Projects',
-    title: 'Projects',
-    description: 'Software Programming: Full-Stack',
-  },
-  {
     key: 'experience',
     label: 'Experience',
     title: 'Experience',
     description: 'Software Engineering Roles, Internships, and Research',
+  },
+  {
+    key: 'project',
+    label: 'Projects',
+    title: 'Projects',
+    description: 'Software, AI, and Low-Level Programming',
   },
   {
     key: 'education',
@@ -30,8 +30,8 @@ const tabs = [
 ];
 
 const groups = [
-  { type: 'project', title: 'Projects' },
   { type: 'experience', title: 'Experience' },
+  { type: 'project', title: 'Projects' },
   { type: 'education', title: 'Education' },
 ];
 
