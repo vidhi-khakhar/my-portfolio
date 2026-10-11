@@ -6,7 +6,7 @@ import harvardLogo from '../assets/harvard-logo.png';
 
 const educationData = [
   {
-    dates: "2024 – 2027",
+    dates: "2024 – 2028",
     title: "Delft University of Technology",
     subtitle: "Bachelor's degree, Computer Science and Engineering",
     details: "Skills: Machine Learning, Algorithms and Data Structures, Information and Data Management, Software Engineering Methods, and more.",

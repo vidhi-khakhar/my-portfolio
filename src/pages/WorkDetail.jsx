@@ -155,6 +155,55 @@ function LinkedInEmbed({ post }) {
   );
 }
 
+function Gallery({ images, className = '' }) {
+  return (
+    <div className={`grid gap-4 ${images.length > 1 ? 'sm:grid-cols-2' : ''} ${className}`}>
+      {images.map((img) => (
+        <figure
+          key={img.src}
+          className="overflow-hidden rounded-xl border border-slate-600 bg-slate-800/60"
+        >
+          <img src={img.src} alt={img.alt} loading="lazy" className="w-full" />
+          {img.caption && (
+            <figcaption className="px-4 py-3 text-sm text-slate-300">{img.caption}</figcaption>
+          )}
+        </figure>
+      ))}
+    </div>
+  );
+}
+
+function VideoEmbed({ video }) {
+  const [playing, setPlaying] = useState(false);
+
+  return (
+    <div className="mt-4 overflow-hidden rounded-xl border border-slate-600 bg-slate-800/60">
+      {playing ? (
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1`}
+          title={video.title}
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowFullScreen
+          className="aspect-video w-full"
+        />
+      ) : (
+        <div className="p-5">
+          <p className="text-sm text-slate-300">
+            This plays a video from YouTube, which may set its own cookies.
+          </p>
+          <button
+            type="button"
+            onClick={() => setPlaying(true)}
+            className="mt-3 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition-colors hover:bg-[#e2e8f0]"
+          >
+            Play video
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function WorkDetail() {
   const { slug } = useParams();
   const entry = workData.find((e) => e.slug === slug);
@@ -239,6 +288,7 @@ function WorkDetail() {
               </>
             )}
 
+            {entry.images?.length > 0 && <Gallery images={entry.images} className="mt-6" />}
             {entry.link && <RepoCard entry={entry} />}
 
             {entry.sections?.map((section, i) => (
@@ -264,6 +314,16 @@ function WorkDetail() {
                   ))}
                 </ul>
               </>
+            )}
+
+            {entry.video && (
+              <div className="mt-10">
+                <h2 className="text-2xl font-bold text-white">Final presentation</h2>
+                {entry.video.note && (
+                  <p className="mt-3 text-sm leading-relaxed text-slate-300">{entry.video.note}</p>
+                )}
+                <VideoEmbed video={entry.video} />
+              </div>
             )}
 
             {entry.linkedinPost && (

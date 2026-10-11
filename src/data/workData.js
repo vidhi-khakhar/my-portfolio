@@ -1,3 +1,4 @@
+import echoCatScreenshot from '../assets/echo-cat.png';
 export const typeLabel = {
   project: 'Project',
   experience: 'Experience',
@@ -6,70 +7,123 @@ export const typeLabel = {
 
 export const workData = [
   // PROJECTS (newest first)
-  {
+    {
     slug: 'portfolio-website',
     type: 'project',
     title: 'Personal portfolio website',
-    summary: 'This site: a React portfolio with hand-built animations, deployed on Vercel.',
-    period: 'June 2026 - Present',
-    technologies: ['React', 'Vite', 'Tailwind CSS'],
+    summary: 'This site: a React portfolio built with Vite and Tailwind CSS, deployed on Vercel.',
+    period: '2026-Present',
+    technologies: ['React', 'Vite', 'Tailwind CSS', 'React Router', 'JavaScript', 'Vercel', 'Git', 'Vibe coding'],
     overview:
-      'A portfolio built from scratch with React, Vite, and Tailwind CSS. The typewriter intro, the fractal tree, and the skills carousel are all written by hand, without animation libraries.',
+      'A multi-page portfolio built with React and Vite and styled with Tailwind CSS. React Router handles navigation between the homepage, the CV, and the work pages, and the site is deployed on Vercel from a GitHub repository. Animations and graphics are by Claude AI.',
+    repoDescription: 'Source code for this portfolio: React, Vite, Tailwind CSS, and React Router. ',
     bullets: [
-      'Built responsive, mobile-first layouts for every section.',
-      'Set up continuous deployment on Vercel, an XML sitemap, and Google Search Console.',
-      'Added client-side routing so the CV, projects, and experience have their own pages.',
+      'Built the interface as reusable React components, with state and effects for interactive features.',
+      'Used React Router for client-side routing, with a Vercel rewrite rule so every page works when opened or refreshed directly.',
+      'Stored projects, experience, and education in one data file, so the Work page list, filter tabs, and detail pages are all generated from it.',
+      'Styled everything with Tailwind CSS using a shared colour theme and responsive, mobile-first layouts.',
+      'Set up continuous deployment from GitHub to Vercel, so every push to the main branch publishes a new version over HTTPS.',
+      'Added search engine basics: page titles and descriptions, Open Graph tags, an XML sitemap, and Google Search Console.',
     ],
     link: 'https://github.com/vidhi-khakhar/my-portfolio',
     related: [],
   },
-  {
+       {
     slug: 'vraag',
     type: 'project',
     title: 'VRAAG: Enterprise Trading RAG Platform',
-    summary: "A proof-of-concept RAG assistant for Vattenfall's energy trading platform.",
+    summary: 'A proof-of-concept AI assistant that answers technical and product-planning questions about a large energy-trading platform.',
     period: 'Aug 2025 – Nov 2025',
-    technologies: ['Azure AI Foundry', 'Azure AI Search', 'Copilot Studio', 'Power Automate', 'RAG'],
+    technologies: ['Azure AI Foundry', 'Azure AI Search', 'Blob Storage', 'Copilot Studio', 'Power Automate', 'Azure DevOps', 'Vector search', 'RAG'],
+    overviewHeading: 'Overview',
     overview:
-      "A proof-of-concept RAG solution for Vattenfall's energy trading platform (VHP). It combines vector-indexed source code, Azure DevOps sprint tracking, and automated documentation flows under the Vattenfall AI Platform (VAIP).",
+      'VRAAG is a proof-of-concept assistant built with Retrieval-Augmented Generation (RAG). It answers technical and non-technical questions by retrieving and combining information from internal documentation. It also uses Azure DevOps data, such as sprints, bugs, and tasks, so it can answer product-planning questions that source code alone cannot answer. An extension uses Power Automate to reduce manual documentation work. When it detects relevant code changes, it can trigger workflows that create or update wiki pages, so the documentation stays in sync with the code.',
+    sections: [
+      {
+        heading: 'Example questions',
+        bullets: [
+          'Is Feature Y already implemented, or planned for an upcoming sprint?',
+          'What are the next steps recommended by the development team?',
+          'Which bugs were fixed in the last sprint?',
+          'What open tasks are still unresolved for Component X?',
+        ],
+      },
+    ],
     bullets: [
-      'Built a cloud-based proof of concept that connects vector-indexed source code with Azure DevOps data.',
-      'Evaluated the system on representative developer workflows and documented its design and limitations.',
-      'Delivered the proof of concept together with design, build, and testing documentation.',
+      'Researched RAG architectures and Azure AI services, then built a cloud-based proof of concept using Azure AI Foundry, AI Search, Blob Storage, Copilot Studio, and Power Automate.',
+      'Integrated vector-indexed source code with Azure DevOps data (sprints, bugs, and tasks) to answer product-planning questions that code alone cannot answer.',
+      'Designed a Power Automate extension that triggers wiki page updates when relevant code changes are detected.',
+      'Worked with Data Privacy and Security Officers to meet governance requirements.',
+      'Evaluated the system on representative developer workflows and delivered the proof of concept with design, build, and test documentation.',
     ],
     link: null,
     related: ['vattenfall'],
   },
-  {
+    {
     slug: 'foodpal',
     type: 'project',
     title: 'FoodPal: Recipe Management Application',
-    summary: 'A full-stack Java desktop app for organizing and sharing recipes.',
-    period: 'Dec 2025 - Jan 2026',
-    technologies: ['Java', 'JavaFX', 'Spring Boot', 'REST API', 'Maven'],
+    summary: 'A full-stack Java desktop app for creating, sharing, and exploring recipes.',
+    period: 'Nov 2025 – Jan 2026',
+    technologies: ['Java', 'JavaFX', 'Spring Boot', 'REST API', 'Maven', 'Agile teamwork'],
+    overviewHeading: 'Overview',
     overview:
-      'A full-stack Java desktop application to organize and share recipes. Users collaborate through a distributed server built with Spring Boot, while personal favorites and shopping lists are managed locally in a JavaFX client.',
+      'FoodPal is a full-stack Java desktop application for organizing and sharing recipes. A Spring Boot server lets users collaborate on shared recipes, while a JavaFX client keeps personal favorites and shopping lists on the user\'s own computer. It was built as a group project for a university software engineering course.',
     bullets: [
-      'Distributed server built with Spring Boot and a REST API.',
-      'JavaFX client that keeps personal favorites and shopping lists locally.',
+      'Built a client-server application with a Spring Boot server and a JavaFX desktop client.',
+      'Added a nutritional overview with a pie chart of fat, carbohydrates, and protein, and a healthiness label (healthy, moderately healthy, or unhealthy) calculated from calories per 100 g.',
+      'Implemented recipe search with alphabetical and date sorting, where multiple search terms must all match.',
+      'Added a shopping list with a reminder that notifies the user at a chosen date and time.',
+      'Supported live language switching between English, Dutch, Spanish, and Romanian.',
     ],
-    link: null,
+    link: 'https://github.com/vidhi-khakhar/recipe-management-app',
     related: [],
   },
-  {
+    {
     slug: 'echo-cat',
     type: 'project',
     title: 'Echo Cat: An x86 Assembly Game',
-    summary: 'A Chrome Dinosaur spinoff written in x86-64 Assembly.',
+    summary: 'A Chrome Dinosaur spin-off written in x86-64 Assembly, with graphics and audio from the raylib library.',
     period: 'Sep 2025 – Nov 2025',
-    technologies: ['Assembly x86-64', 'raylib', 'Linux'],
+    technologies: ['Assembly x86-64', 'C', 'raylib', 'Linux', 'GCC'],
+    overviewHeading: 'Overview',
     overview:
-      'An Assembly x86-64 spinoff of the Chrome Dinosaur game, created for the CSE1400 Computer Organization course at TU Delft together with a classmate.',
-    bullets: [
-      'Implemented the game in x86-64 Assembly, using the raylib graphics library.',
-      'Developed and run on Linux as part of the Computer Organization course.',
+      'Echo Cat is a spin-off of the Chrome Dinosaur game, written in x86-64 Assembly for the Computer Organization course at TU Delft and built together with a classmate. Graphics and audio come from the raylib C library, called through small helper functions. The course staff approved this in advance. The game runs on Linux, and Windows users can run it through WSL. Press Space to start and jump, and R to restart.',
+    repoDescription: 'Source code and build instructions for Echo Cat: x86-64 Assembly with raylib.',
+    images: [
+      {
+        src: echoCatScreenshot,
+        alt: 'Screenshot of Echo Cat gameplay',
+        caption: 'Echo Cat gameplay',
+      },
     ],
-    link: null,
+    bullets: [
+      'Implemented the Chrome Dinosaur game in x86-64 Assembly for the Computer Organization course.',
+      'Used the raylib C library through helper functions to draw the visuals and play audio, after getting approval from the course staff.',
+      'Built and ran the game on Linux with GCC, and wrote installation and run instructions for other players.',
+    ],
+    link: 'https://github.com/soulara28/EchoCat',
+    related: ['tu-delft', 'tu-delft-ta-mentor'],
+  },
+    {
+    slug: 'netnote',
+    type: 'project',
+    title: 'NetNote: Collaborative Markdown Notes',
+    summary: 'A collaborative Markdown note-taking app built by a four-person Agile team in Java, Spring Boot, and JavaFX.',
+    period: 'Nov 2025 – Jan 2026',
+    technologies: ['Java 21', 'Spring Boot', 'JavaFX', 'REST API', 'WebSockets', 'Maven', 'Agile teamwork'],
+    overviewHeading: 'Overview',
+    overview:
+      'NetNote is a collaborative note-taking app where notes are written in Markdown and shown as formatted text. A Spring Boot server stores the notes and a JavaFX desktop client edits them, with real-time synchronisation between users. It was built by a four-person Agile team for a university software engineering course.',
+    bullets: [
+      'Built a client-server application with a Spring Boot server and a JavaFX desktop client, connected through REST APIs and WebSockets.',
+      'Implemented live Markdown rendering, note search, and embedded files that show their type and size.',
+      'Added multi-collection support, so collections can be stored on and opened from different servers on the same network.',
+      'Implemented undo and redo for creating, deleting, and moving notes, plus keyboard shortcuts for common actions.',
+      'Supported live language switching between English, Dutch, Romanian, and Polish, and custom stylesheets for the rendered Markdown.',
+      'Worked in weekly sprints with a four-person team.',
+    ],
+    link: 'https://github.com/vidhi-khakhar/NetNotes',
     related: ['tu-delft'],
   },
 
@@ -123,7 +177,7 @@ export const workData = [
     slug: 'vattenfall',
     type: 'experience',
     title: 'Vattenfall',
-    subtitle: 'AI Intern',
+    subtitle: 'Artificial Intelligence (AI) Intern',
     summary: 'Researched and prototyped a RAG assistant for a regulated energy-trading platform.',
     period: 'Aug 2025 – Nov 2025',
     technologies: ['Azure', 'AI Foundry', 'AI Search', 'Blob Storage', 'Copilot Studio', 'Power Automate', 'RAG'],
@@ -147,7 +201,7 @@ export const workData = [
     slug: 'tutor',
     type: 'experience',
     title: 'Private Tutoring',
-    subtitle: 'IB Mathematics and Physics Tutor',
+    subtitle: 'International Baccalaureate Mathematics and Physics Tutor',
     summary: 'Tutored IB Diploma students one-on-one in Mathematics and Physics, turning difficult topics into clear, step-by-step understanding.',
     period: '2024 – 2025',
     technologies: ['Mathematics', 'Physics', 'IB Diploma', 'One-on-one teaching', 'Communication'],
@@ -163,51 +217,117 @@ export const workData = [
   },
 
   // EDUCATION
-  {
+    {
     slug: 'tu-delft',
     type: 'education',
     title: 'Delft University of Technology',
     subtitle: 'BSc Computer Science and Engineering',
-    summary: 'Focused on algorithms, machine learning, and large-scale data systems.',
-    period: '2024 – 2027',
-    technologies: ['Algorithms and Data Structures', 'Machine Learning', 'Software Engineering Methods', 'Information and Data Management'],
-    overview: null,
-    bullets: [
-      'Teaching assistant and student mentor at the university (see Experience).',
+    summary: 'A computer science degree focused on algorithms, machine learning, and large-scale data systems, combined with project, teaching, and industry work.',
+    period: '2024 – 2028 (expected)',
+    technologies: [
+      'Algorithms and Data Structures',
+      'Object-Oriented Programming',
+      'Machine Learning',
+      'Big Data Processing',
+      'Software Engineering Methods',
+      'Probability and Statistics',
     ],
+    overviewHeading: 'Overview',
+    overview:
+      'I am studying for a BSc in Computer Science and Engineering at TU Delft. My coursework covers algorithms and data structures, object-oriented programming, machine learning, and big data processing with Spark and Flink. I am especially interested in AI and large-scale data systems, and in the engineering and evaluation methods that make AI systems reliable and secure in production.',
+    sections: [
+      {
+        heading: 'Alongside my degree',
+        text: 'I apply what I learn outside the lecture hall.',
+        bullets: [
+          'Worked as an AI intern at Vattenfall, where I built a proof-of-concept RAG assistant on Microsoft Azure.',
+          'Support first-year students as a teaching assistant and student mentor at TU Delft.',
+        ],
+      },
+      {
+        heading: 'What I am looking for',
+        text: 'I am looking for internship and research opportunities in AI, machine learning, and data systems, where I can work on real problems and keep learning.',
+      },
+    ],
+    bullets: [],
     link: null,
-    related: ['tu-delft-ta-mentor', 'echo-cat'],
+    related: ['vattenfall', 'tu-delft-ta-mentor', 'netnote', 'foodpal', 'echo-cat'],
   },
-  {
+      {
     slug: 'ish',
     type: 'education',
     title: 'International School of The Hague',
     subtitle: 'International Baccalaureate Diploma',
-    summary: 'Graduated with an IB Diploma and a bilingual English and Dutch diploma.',
+    summary: 'Completed the IB Diploma with a bilingual diploma in English and Dutch, alongside engineering, leadership, and sport.',
     period: '2009 – May 2024',
-    technologies: ['HL Computer Science', 'HL Business Management', 'HL Mathematics: Analysis & Approaches'],
-    overview: null,
+    technologies: [
+      'HL Computer Science',
+      'HL Business Management',
+      'HL Mathematics: Analysis & Approaches',
+      'SL Physics',
+      'SL English A',
+      'SL Dutch A',
+    ],
+    overviewHeading: 'Overview',
+    overview:
+      'I completed the International Baccalaureate Diploma Programme (IB DP) at the International School of The Hague. The IB DP is a two-year programme built around six academic subjects and a common core. Each subject is assessed in several ways, such as written exams, oral assessments, lab work, essays, and independent research projects. The core has three parts: Theory of Knowledge (TOK), an Extended Essay (EE), and Creativity, Activity, Service (CAS).',
+    sections: [
+      {
+        heading: 'Subjects',
+        bullets: [
+          'Higher Level: Computer Science, Business Management, and Mathematics: Analysis & Approaches.',
+          'Standard Level: Physics, English A Language & Literature, and Dutch A Language & Literature.',
+          'Core: Theory of Knowledge, Extended Essay, and Creativity, Activity, Service.',
+        ],
+      },
+      {
+        heading: 'Extracurriculars',
+        bullets: [
+          'Silverbacks Engineering: Head of Finance and engineer for a team building a battery-powered eco car for Shell Eco-marathon and Greenpower Benelux. We learnt soldering, 3D modelling, and mechanical engineering for sustainability.',
+          'Badminton: Captain of the school\'s first competitive badminton team, which travelled to Lugano for the ESC and won first place. I also won the Coaches Choice award.',
+          'Global Issues Network (GIN): Worked on the UN Sustainable Development Goals and hosted an event for 200+ students from schools across the country, with workshops on important global issues.',
+          'Gender and Sexuality Alliance (GSA): Planned many pride and diversity events, in support of women\'s rights and LGBTQ rights.',
+          'Model United Nations: Took part in 10+ Model United Nations events, learning how to write constructive mock resolutions and communicate effectively.',
+        ],
+      },
+    ],
     bullets: [
-      'Bilingual Diploma in English and Dutch Language and Literature.',
-      'Standard Level: Physics, English A Language & Literature, Dutch A Language & Literature.',
+      'Graduated with a bilingual diploma in English and Dutch.',
+      'Received an award for an outstanding Theory of Knowledge essay.',
     ],
     link: null,
-    related: [],
+    related: ['tutor'],
   },
-  {
+    {
     slug: 'harvard',
     type: 'education',
-    title: 'Harvard Business School',
-    subtitle: 'Summer Programme: Sustainable Product Design and the Innovation Ecosystem',
-    summary: 'A programme on how sustainable design creates competitive advantage through technology.',
+    title: 'Harvard Summer School',
+    subtitle: 'Sustainable Product Design and the Innovation Ecosystem',
+    summary: 'A Harvard Summer School Program (HSSP) course on designing innovative products with the least possible environmental impact.',
     period: '2022 – 2023',
-    technologies: ['Sustainable design', 'Innovation', 'AR/VR'],
-    overview: null,
+    technologies: [
+      'Sustainable design',
+      'Product innovation',
+      'Augmented reality',
+      'Simulation modelling',
+      'Programming',
+    ],
+    overviewHeading: 'Overview',
+    overview:
+      'In the Harvard Summer School Program (HSSP) course "Sustainable Product Design and the Innovation Ecosystem", I learned how to create innovative products with the least possible environmental impact. At the end of the course, I developed a product proposal for a sustainable innovation that could address a global issue. I named it IGNITE.',
     bullets: [
       'Final grade: A (99/100).',
-      'Built a business plan and presentation on industrial use cases for AR/VR technologies.',
+      'Developed IGNITE, a proposal for a futuristic firework that gives customers the same experience as a real firework with zero emissions.',
+      'Researched augmented reality, programming, simulation modelling, and computing devices to design the product.',
+      'Presented the final proposal as a business plan as well as a recorded presentation.',
     ],
     link: null,
-    related: [],
+    related: ['ish'],
+        video: {
+      id: 'aNI1BVYrMZA',
+      title: 'IGNITE final presentation',
+      note: 'IGNITE is a fictional concept created for a school assignment. This presentation was made to demonstrate presentation skills.',
+
+    },
   },
 ];
