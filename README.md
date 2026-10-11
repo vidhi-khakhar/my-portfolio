@@ -2,7 +2,7 @@
 
 This is the repository containing my portfolio site, my first React project. The portfolio showcases my technical skills, experiences, and projects.
 
-🚀 **Live Portfolio:** [https://vidhikhakhar.vercel.app/] (https://vidhikhakhar.vercel.app/)
+🚀 **Live Portfolio:** [https://vidhikhakhar.vercel.app/](https://vidhikhakhar.vercel.app/)
 📂 **GitHub Repository:** [github.com/vidhikhakhar/portfolio](https://github.com/vidhikhakhar/portfolio)
 
 ---
